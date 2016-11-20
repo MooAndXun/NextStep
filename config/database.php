@@ -48,7 +48,7 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', __DIR__.'/nextstep.db'),
+            'database' => env('DB_DATABASE', __DIR__.'/../database/nextstep.db'),
             'prefix' => '',
         ],
 
