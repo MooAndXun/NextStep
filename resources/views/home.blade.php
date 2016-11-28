@@ -8,7 +8,7 @@
     <hr>
     <div id="content">
         <ul>
-            @foreach ($users as $user)
+            {{--@foreach ($users as $user)--}}
                 <li style="margin: 50px 0;">
                     <div class="title">
                         <a href="#">
@@ -19,7 +19,7 @@
                         <p>{{ $user->password }}</p>
                     </div>
                 </li>
-            @endforeach
+            {{--@endforeach--}}
         </ul>
     </div>
 @endsection
