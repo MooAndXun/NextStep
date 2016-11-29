@@ -8,6 +8,41 @@ use App\Models\Activity;
 
 class ActivityController extends Controller
 {
+    // Page
+    public function activity_page(Request $request, $isMine) {
+        if($isMine=='my') {
+            $username = session("username");
+        } else {
+            $username = null;
+        }
+
+        if(!$username) {
+            $activities = Activity::where("creator_username", $username);
+        } else {
+            $activities = Activity::all()->sortByDesc("start");
+        }
+
+        foreach ($activities as $activity) {
+            $activity['people_now'] = Activity::find($activity['id'])->participators()->count();
+            $start = strtotime($activity['start']);
+            $end = strtotime($activity['end']);
+            $activity['left-time'] = ($end-$start)/3600;
+
+            switch ($activity['type']) {
+                case 1:
+                    $activity['type'] = '多人竞赛';
+                    break;
+                case 2:
+                    $activity['type'] = '目标竞赛';
+                    break;
+            }
+        }
+
+        return view('pages.activity')->with("activities", $activities);
+    }
+
+
+    // Ajax
     public function create(Request $request){
         try{
             $this->validate($request, [

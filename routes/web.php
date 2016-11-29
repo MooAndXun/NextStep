@@ -21,5 +21,8 @@ Route::get('/home', 'HomeController@mine')->middleware('login_check');
 
 Route::post('/user/login', 'UserController@login');
 Route::post('/user/register', 'UserController@register');
-Route::get('/user/info','UserController@getUserInfo');
 Route::post('/user/info','UserController@updateUserInfo');
+Route::get('/user/info','UserController@getUserInfo');
+
+
+Route::get('/activity/{isMine?}', 'ActivityController@activity_page');

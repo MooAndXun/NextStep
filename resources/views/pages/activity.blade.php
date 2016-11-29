@@ -21,7 +21,7 @@
           <img src="{{$activity['avatar_img']}}" alt="Avatar" class="avatar">
           <div class="act-snap-info">
             <p class="name">{{$activity['name']}}</p>
-            <p class="intro">{{$activity['begin']}} — {{$activity['end']}}</p>
+            <p class="intro">{{$activity['start']}} — {{$activity['end']}}</p>
           </div>
           <a href="/template/activity-detail.html" class="btn btn-second waves-effect waves-light">详情</a>
           <button class="join-btn btn waves-effect waves-light">加入</button>
@@ -41,7 +41,7 @@
           </div>
           <div class="act-info-item">
             <i class="material-icons medium">people</i>
-            <p class="info">{{$activity['people_num']}} / {{$activity['people_limit']}} 人</p>
+            <p class="info">{{$activity['people_now']}} / {{$activity['people_num']}} 人</p>
           </div>
         </div>
       </div>
