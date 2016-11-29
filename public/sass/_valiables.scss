@@ -1,0 +1,20 @@
+$primary-color: #4C535D !default;
+$primary-color-light: lighten($primary-color, 15%) !default;
+$primary-color-dark: darken($primary-color, 15%) !default;
+
+$secondary-color: #F09886 !default;
+$secondary-color-light: lighten($secondary-color, 15%) !default;
+$secondary-color-dark: darken($secondary-color, 15%) !default;
+
+$white-color: #fff !default;
+$grey-color: #fafafa !default;
+$grey-color-light: lighten($grey-color, 15%) !default;
+$grey-color-dark: darken($grey-color, 10%) !default;
+$grey-color-darker: darken($grey-color, 20%) !default;
+
+$base-font-size: 16px;
+
+// Login Page
+$login-card-width: 320px;
+$login-square-height: 48px;
+$login-title-height: $login-square-height + ($login-card-width / 8);

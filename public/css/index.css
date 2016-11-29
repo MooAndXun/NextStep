@@ -1,0 +1,379 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'Berlin Sans FB Demi Bold';
+  src: url("/fonts/BRLNSDB.TTF") format("truetype"); }
+
+body {
+  background-color: #fafafa; }
+
+#root,
+body,
+html {
+  width: 100%;
+  height: 100%; }
+
+a,
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+img,
+span {
+  border: 0 solid black;
+  margin: 0;
+  padding: 0;
+  color: #4C535D;
+  font-size: 16px;
+  font-weight: 300; }
+
+.wrapper {
+  width: 960px;
+  margin: 0 auto; }
+
+a {
+  transition: all 0.2s;
+  color: #4C535D;
+  text-decoration: underline; }
+
+a:hover {
+  transition: all 0.2s;
+  color: #F09886; }
+
+.collection-item,
+.tab a,
+.icon-link {
+  text-decoration: none; }
+
+i.material-icons {
+  font-size: 40px; }
+
+.btn {
+  padding: 0;
+  width: 90px;
+  height: 33px; }
+
+.btn-second {
+  background-color: #fff;
+  color: #4C535D; }
+  .btn-second:focus {
+    background-color: inherit; }
+  .btn-second:hover {
+    background-color: #e1e1e1; }
+
+.tabs .indicator {
+  height: 4px; }
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px; }
+  .avatar-small {
+    width: 45px;
+    height: 45px;
+    border-radius: 22.5px; }
+
+.data-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  flex-shrink: 0;
+  align-content: flex-start;
+  margin-top: 20px; }
+  .data-group p {
+    margin: 0; }
+  .data-group .data-item {
+    width: 80px;
+    text-align: center; }
+    .data-group .data-item .data-item-name {
+      font-size: 14px; }
+  .data-group .divider {
+    width: 1px;
+    height: auto;
+    background-color: #6e7987; }
+
+.collection {
+  margin: 0; }
+  .collection .collection-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-shrink: 0;
+    align-content: flex-start; }
+  .collection .collection-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-shrink: 0;
+    align-content: flex-start;
+    flex-basis: 0;
+    flex-grow: 1; }
+    .collection .collection-col-1 {
+      flex-grow: 1; }
+    .collection .collection-col-2 {
+      flex-grow: 2; }
+    .collection .collection-col-3 {
+      flex-grow: 3; }
+    .collection .collection-col-4 {
+      flex-grow: 4; }
+    .collection .collection-col-5 {
+      flex-grow: 5; }
+    .collection .collection-col * {
+      margin-right: 10px; }
+
+body.login-body {
+  background: url("/img/bg.jpg");
+  background-attachment: fixed;
+  background-size: cover; }
+
+header {
+  height: 300px;
+  background-image: url("/img/nav.png");
+  background-size: cover; }
+  header .header-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 960px;
+    height: 100%;
+    margin: 0 auto; }
+  header .nav-content {
+    flex-grow: 1; }
+  header .tabs-wrapper {
+    flex-grow: 0;
+    width: 400px; }
+  header .tabs.nav-tabs {
+    background-color: transparent; }
+    header .tabs.nav-tabs .tab.nav-tab a {
+      color: #fff; }
+    header .tabs.nav-tabs .indicator {
+      background-color: #F09886; }
+
+nav.page-nav {
+  background-color: transparent;
+  box-shadow: none; }
+  nav.page-nav .nav-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    nav.page-nav .nav-wrapper .brand-logo {
+      position: relative;
+      color: #fff;
+      flex-grow: 1;
+      font-family: 'Berlin Sans FB Demi Bold';
+      font-size: 40px; }
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 960px;
+  margin: 30px auto; }
+  .container .content-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-shrink: 0;
+    align-content: flex-start;
+    flex-grow: 0;
+    width: 200px; }
+    .container .content-left .user-info-card .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      flex-shrink: 0;
+      align-content: flex-start; }
+      .container .content-left .user-info-card .card-content .avatar {
+        width: 90px;
+        height: 90px;
+        border-radius: 45px; }
+      .container .content-left .user-info-card .card-content .info-group {
+        margin-top: 20px; }
+    .container .content-left .siderbar-nav .collection {
+      width: 100%;
+      margin: 0; }
+      .container .content-left .siderbar-nav .collection .collection-item {
+        height: 50px;
+        line-height: 30px; }
+  .container .content {
+    flex-grow: 1;
+    margin-left: 40px; }
+    .container .content .search-nav {
+      margin: 0.5rem 0 1rem; }
+    .container .content .card-group {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      flex-shrink: 0;
+      align-content: flex-start; }
+    .container .content .friend-card-group .friend-card .card-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      flex-shrink: 0;
+      align-content: flex-start; }
+      .container .content .friend-card-group .friend-card .card-content .avatar {
+        flex-grow: 0; }
+      .container .content .friend-card-group .friend-card .card-content .user-info {
+        flex-grow: 1;
+        margin: 0 10px; }
+      .container .content .friend-card-group .friend-card .card-content .icon-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        flex-shrink: 0;
+        align-content: flex-start;
+        flex-grow: 0; }
+        .container .content .friend-card-group .friend-card .card-content .icon-info .step-count {
+          width: 60px; }
+    .container .content .act-card-group .act-card .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      flex-shrink: 0;
+      align-content: flex-start; }
+      .container .content .act-card-group .act-card .card-content .act-snap {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        flex-shrink: 0;
+        align-content: flex-start; }
+        .container .content .act-card-group .act-card .card-content .act-snap .act-snap-info {
+          flex-grow: 1;
+          margin: 0 10px; }
+        .container .content .act-card-group .act-card .card-content .act-snap .btn {
+          margin-left: 10px; }
+        .container .content .act-card-group .act-card .card-content .act-snap .join-btn {
+          background-color: #F09886;
+          font-size: 14px; }
+          .container .content .act-card-group .act-card .card-content .act-snap .join-btn:hover {
+            background-color: #f8d2ca; }
+      .container .content .act-card-group .act-card .card-content .act-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        flex-shrink: 0;
+        align-content: flex-start;
+        margin-top: 30px;
+        margin-left: 10px; }
+        .container .content .act-card-group .act-card .card-content .act-info .act-info-item {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          flex-shrink: 0;
+          align-content: flex-start; }
+          .container .content .act-card-group .act-card .card-content .act-info .act-info-item p.info {
+            margin-left: 5px; }
+    .container .content .sport-today {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      flex-shrink: 0;
+      align-content: flex-start; }
+      .container .content .sport-today .sport-today-card {
+        margin-right: 30px;
+        flex-grow: 1; }
+        .container .content .sport-today .sport-today-card:last-child {
+          margin-right: 0; }
+        .container .content .sport-today .sport-today-card .card-data {
+          width: 300px;
+          height: 300px;
+          margin: 0 auto;
+          position: relative; }
+          .container .content .sport-today .sport-today-card .card-data i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px; }
+    .container .content .stat-line-card .sum-data-group .data-item {
+      flex-grow: 1; }
+
+.login-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 320px; }
+  .login-card .title-block {
+    position: relative;
+    height: 98px;
+    overflow: hidden; }
+    .login-card .title-block p {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      line-height: 88px;
+      font-size: 18px;
+      color: #fff; }
+    .login-card .title-block .square {
+      height: 48px;
+      background-color: #4C535D; }
+    .login-card .title-block .triangle {
+      font-size: 0;
+      overflow: hidden;
+      border-width: 160px;
+      cursor: pointer;
+      border-style: solid dashed dashed dashed;
+      border-color: #4C535D transparent transparent transparent;
+      border-bottom: none;
+      height: 25px;
+      overflow: hidden;
+      transform: translateY(-37.5%) scaleY(0.25);
+      -ms-transform: translateY(-37.5%) scaleY(0.25);
+      /* IE 9 */
+      -moz-transform: translateY(-37.5%) scaleY(0.25);
+      /* Firefox */
+      -webkit-transform: translateY(-37.5%) scaleY(0.25);
+      /* Safari 和 Chrome */
+      -o-transform: translateY(-37.5%) scaleY(0.25); }
+  .login-card .login-form {
+    position: relative;
+    padding: 0 25px; }
+    .login-card .login-form .input-field label {
+      font-size: 18px; }
+    .login-card .login-form .input-field input:focus + label {
+      font-size: 14px; }
+    .login-card .login-form p {
+      text-align: center; }
+    .login-card .login-form .invisible {
+      height: 50px; }
+    .login-card .login-form .login-btn {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      background-color: #F09886;
+      transform: translate(-50%, 50%);
+      -ms-transform: translate(-50%, 50%);
+      /* IE 9 */
+      -moz-transform: translate(-50%, 50%);
+      /* Firefox */
+      -webkit-transform: translate(-50%, 50%);
+      /* Safari 和 Chrome */
+      -o-transform: translate(-50%, 50%); }
+      .login-card .login-form .login-btn i {
+        font-size: 30px; }
+
+footer.page-footer {
+  padding: 10px 0; }
+  footer.page-footer p {
+    margin: 0;
+    color: #c7c7c7; }

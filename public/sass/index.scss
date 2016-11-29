@@ -1,0 +1,465 @@
+@charset "UTF-8";
+@import '_mixin.scss';
+@import "_valiables.scss";
+@import "_fontface.scss";
+
+body {
+  background-color: #fafafa;
+}
+
+#root,
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+a,
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+img,
+span {
+  border: 0 solid black;
+  margin: 0;
+  padding: 0;
+  // Font
+  color: $primary-color;
+  font-size: $base-font-size;
+  font-weight: 300;
+}
+
+.wrapper {
+  width: 960px;
+  margin: 0 auto;
+}
+
+// Common component
+a {
+  transition: all 0.2s;
+  color: $primary-color;
+  text-decoration: underline;
+}
+
+a:hover {
+  transition: all 0.2s;
+  color: $secondary-color;
+}
+.collection-item,
+.tab a,
+.icon-link {
+  text-decoration: none;
+}
+
+i.material-icons {
+  font-size: 40px;
+}
+
+.btn {
+  padding: 0;
+  width: 90px;
+  height: 33px;
+}
+
+.btn-second {
+  background-color: $white-color;
+  color: $primary-color;
+
+  &:focus {
+    background-color: inherit;
+  }
+
+  &:hover {
+    background-color: $grey-color-dark;
+  }
+}
+
+.tabs .indicator {
+  // background-color: $secondary-color;
+  height: 4px;
+}
+
+.avatar {
+  $avatar-size: 60px;
+  width: $avatar-size;
+  height: $avatar-size;
+  border-radius: $avatar-size * 0.5;
+
+  &-small {
+    width: $avatar-size * 0.75;
+    height: $avatar-size * 0.75;
+    border-radius: $avatar-size * 0.75 * 0.5;
+  }
+}
+
+.data-group {
+  @include flex(row, center, stretch);
+  margin-top: 20px;
+
+  p {
+    margin: 0;
+  }
+
+  .data-item {
+    width: 80px;
+    text-align: center;
+
+    .data-item-name {
+      font-size: 14px;
+    }
+  }
+
+  .divider {
+    width: 1px;
+    height: auto;
+    background-color: $primary-color-light;
+  }
+}
+
+.collection {
+  margin: 0;
+
+  .collection-item {
+    @include flex(row, flex-start, stretch);
+  }
+
+  .collection-col {
+    @include flex(row, flex-start, center);
+    flex-basis: 0;
+    flex-grow: 1;
+
+    &-1 {
+      flex-grow: 1;
+    }
+
+    &-2 {
+      flex-grow: 2;
+    }
+
+    &-3 {
+      flex-grow: 3;
+    }
+
+    &-4 {
+      flex-grow: 4;
+    }
+
+    &-5 {
+      flex-grow: 5;
+    }
+
+    * {
+      margin-right: 10px;
+    }
+  }
+}
+
+body.login-body {
+  background: url('/img/bg.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+header {
+  height: 300px;
+  background-image: url('/img/nav.png');
+  background-size: cover;
+
+  .header-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 960px;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .nav-content {
+    flex-grow: 1;
+  }
+
+  .tabs-wrapper {
+    flex-grow: 0;
+    width: 400px;
+  }
+
+  .tabs.nav-tabs {
+    background-color: rgba(0, 0, 0, 0);
+
+    .tab.nav-tab {
+      a {
+        color: $white-color;
+      }
+    }
+
+    .indicator {
+      background-color: $secondary-color;
+    }
+  }
+}
+
+nav.page-nav {
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: none;
+
+  .nav-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .brand-logo {
+      position: relative;
+      color: $white-color;
+      flex-grow: 1;
+      font-family: 'Berlin Sans FB Demi Bold';
+      font-size: 40px;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 960px;
+  margin: 30px auto;
+
+  .content-left {
+    @include flex(column, flex-start, stretch);
+    flex-grow: 0;
+    width: 200px;
+
+    .user-info-card .card-content {
+      @include flex(column, flex-start, center);
+
+      .avatar {
+        width: 90px;
+        height: 90px;
+        border-radius: 45px;
+      }
+
+      .info-group {
+        margin-top: 20px;
+      }
+    }
+
+    .siderbar-nav {
+      .collection {
+        width: 100%;
+        margin: 0;
+
+        .collection-item {
+          height: 50px;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+
+  .content {
+    flex-grow: 1;
+    margin-left: 40px;
+
+    .search-nav {
+      margin: 0.5rem 0 1rem;
+    }
+
+    .card-group {
+      @include flex(column, flex-start, stretch);
+    }
+
+    .friend-card-group .friend-card .card-content {
+      @include flex(row, flex-start, center);
+
+      .avatar {
+        flex-grow: 0;
+      }
+
+      .user-info {
+        flex-grow: 1;
+        margin: 0 10px;
+      }
+
+      .icon-info {
+        @include flex(row,flex-start, center);
+        flex-grow: 0;
+
+        .step-count {
+          width: 60px;
+        }
+      }
+    }
+
+    .act-card-group .act-card .card-content {
+      @include flex(column, flex-start, stretch);
+
+      .act-snap {
+        @include flex(row, flex-start, center);
+
+        .act-snap-info {
+          flex-grow: 1;
+          margin: 0 10px;
+        }
+
+        .btn {
+          margin-left: 10px;
+        }
+
+        .join-btn {
+          background-color: $secondary-color;
+          font-size: 14px;
+
+          &:hover {
+            background-color: $secondary-color-light;
+          }
+        }
+      }
+
+      .act-info {
+        @include flex(row, flex-start, center);
+        margin-top: 30px;
+        margin-left: 10px;
+
+        .act-info-item {
+          flex-grow: 1;
+          @include flex(row, flex-start, center);
+
+          p.info {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+
+    .sport-today {
+      @include flex(row, flex-start, center);
+
+      .sport-today-card {
+        margin-right: 30px;
+        flex-grow: 1;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .card-data {
+          width: 300px;
+          height: 300px;
+          margin: 0 auto;
+          position: relative;
+
+          i {
+            @include absolute-center();
+            font-size: 100px;
+          }
+        }
+      }
+    }
+
+    .stat-line-card {
+      .sum-data-group {
+        .data-item {
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+}
+// Login page
+
+.login-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 320px;
+
+  .title-block {
+    position: relative;
+    height: 98px;
+    overflow: hidden;
+
+    p {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      line-height: $login-title-height;
+      font-size: 18px;
+      color: $white-color;
+    }
+
+    .square {
+      height: 48px;
+      background-color: $primary-color;
+    }
+
+    .triangle {
+      @include arrow(bottom,160px,$primary-color);
+      height: 25px;
+      overflow: hidden;
+      transform: translateY(-37.5%) scaleY(0.25);
+      -ms-transform: translateY(-37.5%) scaleY(0.25);
+      /* IE 9 */
+      -moz-transform: translateY(-37.5%) scaleY(0.25);
+      /* Firefox */
+      -webkit-transform: translateY(-37.5%) scaleY(0.25);
+      /* Safari 和 Chrome */
+      -o-transform: translateY(-37.5%) scaleY(0.25);
+    }
+  }
+
+  .login-form {
+    position: relative;
+    padding: 0 25px;
+
+    .input-field label {
+      font-size: 18px;
+    }
+
+    .input-field input:focus + label {
+      font-size: 14px;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .invisible {
+      height: 50px;
+    }
+
+    .login-btn {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      background-color: $secondary-color;
+      transform: translate(-50%, 50%);
+      -ms-transform: translate(-50%, 50%);
+      /* IE 9 */
+      -moz-transform: translate(-50%, 50%);
+      /* Firefox */
+      -webkit-transform: translate(-50%, 50%);
+      /* Safari 和 Chrome */
+      -o-transform: translate(-50%, 50%);
+
+      i {
+        font-size: 30px;
+      }
+    }
+  }
+}
+
+footer.page-footer {
+  padding: 10px 0;
+
+  p {
+    margin: 0;
+    color: $grey-color-darker;
+  }
+}
