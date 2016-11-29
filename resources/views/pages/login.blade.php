@@ -25,19 +25,20 @@
                 <div class="square"></div>
                 <div class="triangle"></div>
             </div>
-            <form class="login-form" action="#">
+            <form class="login-form" action="{{ url('/user/login') }}" method="post">
+                {!! csrf_field() !!}
                 <div class="input-field">
-                    <input id="username" type="text" class="validate">
+                    <input id="username" name="username" type="text" class="validate">
                     <label for="username">Username</label>
                 </div>
                 <div class="input-field">
-                    <input id="password" type="password" class="validate">
+                    <input id="password" name="password" type="password" class="validate">
                     <label for="password">Password</label>
                 </div>
                 <p><a href="#">Forgot password?</a></p>
                 <p>Not a member? <a href="#">Sign up now</a></p>
                 <div class="invisible"></div>
-                <a href="/index.html" class="btn-floating btn-large waves-effect waves-light login-btn"><i class="material-icons">keyboard_arrow_right</i></a>
+                <input type="submit'" class="btn-floating btn-large waves-effect waves-light login-btn"><i class="material-icons">keyboard_arrow_right</i></input>
             </form>
         </div>
     </div>

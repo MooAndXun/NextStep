@@ -45,10 +45,10 @@
       @foreach($user_ranks as $index=>$user_rank)
       <li class="collection-item">
         <div class="collection-col collection-col-2 user-col">
-          <img src="{{$user_rank->avatar_img}}" alt="" class="avatar avatar-small">
-          <p>{{$user_rank->nick_name}}</p>
+          <img src="{{$user_rank['avatar_img']}}" alt="" class="avatar avatar-small">
+          <p>{{$user_rank['nick_name']}}</p>
         </div>
-          <div class="collection-col collection-col-2 count-col">{{$user_rank->steps}}</div>
+          <div class="collection-col collection-col-2 count-col">{{$user_rank['steps']}}</div>
         <div class="collection-col rank-col">{{$index+1}}</div>
       </li>
       @endforeach

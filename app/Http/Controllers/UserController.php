@@ -40,10 +40,9 @@ class UserController extends Controller
             $test_password = md5($password);
             if($test_password == $user->password){
                 $request->session()->put('username', $name);
-                $response = array(
-                    'status' => 'success',
-                    'msg' => '登录成功'
-                );
+//                $request->session()->put('avatar', $user->avatar);
+//                return view('pages.mine')->with(['user'=>$user]);
+                return view('home')->withUser($user);
             }else{
                 $response = array(
                     'status' => 'failed',
@@ -150,8 +149,7 @@ class UserController extends Controller
         return response()->json($response);
     }
 
-
-    public function followone(Request $request){
+    public function followUser(Request $request){
         $this->validate($request, [
             'username' => 'required'
         ]);
@@ -159,11 +157,13 @@ class UserController extends Controller
         $name = $request->session()->get('username');
         if($name){
             $user = User::find($request->get('username'));
+            $own = User::find($name);
             if($user){
-                $follow = new Follow();
-                $follow->follower_username = $name;
-                $follow->following_username = $user->username;
-                $follow->save();
+//                $follow = new Follow();
+//                $follow->follower_username = $name;
+//                $follow->following_username = $user->username;
+//                $follow->save();
+                $own->followings()->save($user);
                 $response = array(
                     'status' => 'success',
                     'msg' => '关注成功'
