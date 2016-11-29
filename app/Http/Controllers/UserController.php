@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use Illuminate\Http\Request;
-//use Illuminate\Http\Response;
-use App\Models\User;
 use League\Flysystem\Exception;
-use Illuminate\Support\Facades\Crypt;
+
+use App\Models\User;
+use App\Models\Participator;
 
 class UserController extends Controller
 {
@@ -22,10 +23,15 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required'
-        ]);
+        try{
+            $this->validate($request, [
+                'username' => 'required',
+                'password' => 'required'
+            ]);
+        }catch (Exception $exception){
+            //TODO
+        }
+
         $name = $request->get('username');
         $password = $request->get('password');
         $response = null;
@@ -129,18 +135,52 @@ class UserController extends Controller
                     'msg' => '修改成功'
                 );
             }catch (Exception $exception){
-                array(
+                $response = array(
                     'status' => 'failed',
                     'msg' => '数据库异常'
                 );
             }
         }else{
-            array(
+            $response = array(
                 'status' => 'failed',
                 'msg' => '用户未登录'
             );
         }
 
+        return response()->json($response);
+    }
+
+
+    public function followone(Request $request){
+        $this->validate($request, [
+            'username' => 'required'
+        ]);
+        $response = null;
+        $name = $request->session()->get('username');
+        if($name){
+            $user = User::find($request->get('username'));
+            if($user){
+                $follow = new Follow();
+                $follow->follower_username = $name;
+                $follow->following_username = $user->username;
+                $follow->save();
+                $response = array(
+                    'status' => 'success',
+                    'msg' => '关注成功'
+                );
+            }else{
+                $response = array(
+                    'status' => 'failed',
+                    'msg' => '该用户不存在'
+                );
+            }
+
+        }else{
+            $response = array(
+                'status' => 'failed',
+                'msg' => '用户未登录'
+            );
+        }
         return response()->json($response);
     }
 }
