@@ -24,6 +24,6 @@ class HomeController extends Controller
     public function index()
     {
 //        return view('home')->withUsers(\App\Models\User::all());
-        return view('mine');
+        return view('pages.mine');
     }
 }
