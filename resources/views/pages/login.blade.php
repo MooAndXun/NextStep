@@ -38,7 +38,7 @@
                 <p><a href="#">Forgot password?</a></p>
                 <p>Not a member? <a href="#">Sign up now</a></p>
                 <div class="invisible"></div>
-                <input type="submit'" class="btn-floating btn-large waves-effect waves-light login-btn"><i class="material-icons">keyboard_arrow_right</i></input>
+                <button type="submit'" class="btn-floating btn-large waves-effect waves-light login-btn"><i class="material-icons">keyboard_arrow_right</i></button>
             </form>
         </div>
     </div>
