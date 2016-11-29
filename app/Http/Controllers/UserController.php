@@ -42,7 +42,7 @@ class UserController extends Controller
                 $request->session()->put('username', $name);
 //                $request->session()->put('avatar', $user->avatar);
 //                return view('pages.mine')->with(['user'=>$user]);
-                return view('home')->withUser($user);
+                return redirect("/home");
             }else{
                 $response = array(
                     'status' => 'failed',
