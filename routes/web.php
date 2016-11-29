@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@mine');
+Route::get('/home', 'HomeController@mine')->middleware('login_check');
 
 Route::post('/user/login', 'UserController@login');
 Route::post('/user/register', 'UserController@register');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use DateTime;
 
 use App\Models\User;
@@ -14,7 +15,7 @@ class HomeController extends Controller
 
     public function __construct(HealthDAO $healthDAO)
     {
-        $this->$healthDAO = $healthDAO;
+        $this->healthDAO = $healthDAO;
     }
 
     public function mine(Request $request)
