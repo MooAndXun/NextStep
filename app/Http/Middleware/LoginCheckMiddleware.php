@@ -19,8 +19,7 @@ class LoginCheckMiddleware
         if($username){
             return $next($request);
         }else{
-
+            return redirect("/");
         }
-        return redirect("/");
     }
 }

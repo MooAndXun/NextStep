@@ -8,9 +8,16 @@ use League\Flysystem\Exception;
 
 use App\Models\User;
 use App\Models\Participator;
+use App\DAOs\HealthDAO;
 
 class UserController extends Controller
 {
+    protected $healthDAO;
+
+    public function __construct(HealthDAO $healthDAO)
+    {
+        $this->healthDAO = $healthDAO;
+    }
     public function store(Request $request){
         $this->validate($request, [
             'username' => 'required',
@@ -182,5 +189,15 @@ class UserController extends Controller
             );
         }
         return response()->json($response);
+    }
+
+    //get
+    public function friends($username){
+        $date=new DateTime();
+        $today = $date->format('Y-m-d');
+        $friend_data = $this->healthDAO->friends_data($username,$today);
+        return view('pages.firend').with([
+            'friends' => $friend_data
+        ]);
     }
 }

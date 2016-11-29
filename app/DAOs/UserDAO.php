@@ -18,4 +18,13 @@ class UserDAO
         }
     }
 
+    public function getFriends($username,$date){
+        $friend = DB::select('SELECT nick_name AS name,avatar as avatar_img,step.steps as steps FROM (SELECT * FROM follow WHERE follower_username = :username) follow
+                                    JOIN user following ON follow.following_username = following.username
+                                    JOIN step ON step.username = following.username
+                                    WHERE step."date" = :date
+                                  ORDER BY step.steps', [':username'=>$username,':date'=>$date]);
+        return $friend;
+    }
+
 }

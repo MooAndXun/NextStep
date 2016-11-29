@@ -27,8 +27,8 @@ class HomeController extends Controller
         $steps = $user->steps()->where('date',$result)->first();
         $sleep = $user->sleep()->where('date',$result)->first();
         $sleep_hour = ($sleep->sleep_minutes)/60;
-        $users_data = $this->healthDAO->today_step_rank($user->username,$date);
-        $rank = $this->healthDAO->user_step_rank($user->username,$steps->steps,$date);
+        $users_data = $this->healthDAO->friends_data($user->username,$result,10);
+        $rank = $this->healthDAO->user_step_rank($user->username,$steps->steps,$result);
         foreach($users_data as $data){
             //TODO
         }
