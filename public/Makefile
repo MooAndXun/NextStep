@@ -1,6 +1,6 @@
 .PHONY: all
 all:
-	(make server & make sass & wait)
+	(make sass & make server & wait)
 
 .PHONY: css
 css:
@@ -13,7 +13,7 @@ server:
 
 .PHONY: sass
 sass:
-	node-sass --watch sass -o css
+	node-sass --watch ./sass -o ./css
 
 .PHONY: clean
 clean:
