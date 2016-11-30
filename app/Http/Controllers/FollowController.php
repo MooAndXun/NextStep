@@ -8,17 +8,30 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Logic\HealthLogic;
+use App\Utils\ObjectUtil;
+
 
 class FollowController
 {
+    protected $healthLogic;
+    public  function __construct(HealthLogic $logic){
+        $this->healthLogic = $logic;
+    }
+
+
     // Page
-    public function friends_page($username){
-        $date=new DateTime();
-        $today = $date->format('Y-m-d');
-        $friend_data = $this->healthDAO->friends_data($username,$today);
-        return view('pages.friend').with([
-                'friends' => $friend_data
-            ]);
+    public function friends_page(Request $request){
+//        $username = session()->get('user')['username'];
+        $username = 'Nick';
+        $today = date("Y-m-d");
+        $friend_data = $this->healthLogic->friends_data($username,$today,null);
+        $friend_data = ObjectUtil::object_to_array($friend_data);
+//        foreach ($friend_data as $data){
+//            $data = (array)$data;
+//        }
+        return view('pages.friend')->with('friends' , $friend_data);
     }
 
 
@@ -57,4 +70,6 @@ class FollowController
         }
         return response()->json($response);
     }
+
+
 }

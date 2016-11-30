@@ -34,6 +34,11 @@ Route::group(['prefix'=>'user'], function () {
     Route::get('info','UserController@getUserInfo');
 });
 
+//Follow Routes
+Route::group(['prefix'=>'follow'],function (){
+    Route::get('','FollowController@friends_page');
+});
+
 // Home Routes
 Route::group(["prefix"=>'home'], function () {
     Route::get('/', 'HomeController@today_page')->middleware("login_check");
