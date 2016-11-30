@@ -4,43 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use League\Flysystem\Exception;
+
 use App\Models\Activity;
+use App\Logic\ActivityLogic;
 
 class ActivityController extends Controller
 {
+    protected $activityLogic;
+    public function __construct(ActivityLogic $activityLogic)
+    {
+        $this->activityLogic = $activityLogic;
+    }
+
     // Page
-    public function activity_page(Request $request, $isMine) {
-        if($isMine=='my') {
-            $username = session("username");
+    public function activity_page(Request $request) {
+        $isMine = $request->get("isMine");
+
+        if($isMine) {
+            $username = session("user")['username'];
         } else {
             $username = null;
         }
 
-        if(!$username) {
+        if($username) {
             $activities = Activity::where("creator_username", $username);
         } else {
             $activities = Activity::all()->sortByDesc("start");
         }
 
         foreach ($activities as $activity) {
-            $activity['people_now'] = Activity::find($activity['id'])->participators()->count();
-            $start = strtotime($activity['start']);
-            $end = strtotime($activity['end']);
-            $activity['left-time'] = ($end-$start)/3600;
-
-            switch ($activity['type']) {
-                case 1:
-                    $activity['type'] = '多人竞赛';
-                    break;
-                case 2:
-                    $activity['type'] = '目标竞赛';
-                    break;
-            }
+            $activity = $this->activityLogic->dealWithActivity($activity);
         }
 
         return view('pages.activity')->with("activities", $activities);
     }
 
+    public function activity_detail_page(Request $request, $id) {
+        $activity = $this->activityLogic->findSimpleActivity($id);
+        $participators = $this->activityLogic->findParticipatorRank($activity);
+        echo json_encode($participators);
+
+        return view('pages.activity-detail')->with([
+            "activity"=>$activity,
+            "participators"=>$participators
+        ]);
+
+    }
 
     // Ajax
     public function create(Request $request){

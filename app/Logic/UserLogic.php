@@ -1,5 +1,5 @@
 <?php
-namespace App\DAOs;
+namespace App\Logic;
 use App\Models\User;
 /**
  * Created by PhpStorm.
@@ -7,7 +7,7 @@ use App\Models\User;
  * Date: 2016/11/27
  * Time: 14:29
  */
-class UserDAO
+class UserLogic
 {
     public function getByName($name){
         try{

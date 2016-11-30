@@ -9,7 +9,7 @@
           <img src="/img/person-3.jpg" alt="Avatar" class="avatar">
           <div class="act-snap-info">
             <p class="name">{{$activity['name']}}</p>
-            <p class="intro">{{$activity['begin']}} — {{$activity['end']}}</p>
+            <p class="intro">{{$activity['start']}} — {{$activity['end']}}</p>
           </div>
           <button class="join-btn btn waves-effect waves-light">加入</button>
         </div>
@@ -52,13 +52,13 @@
           <div class="collection-col collection-col-2 count-col">完成度</div>
           <div class="collection-col rank-col">排名</div>
         </li>
-        @foreach($participates as $index=>$participate)
+        @foreach($participators as $index=>$participator)
         <li class="collection-item">
           <div class="collection-col collection-col-2 user-col">
-            <img src="{{$participate['avatar_img']}}" alt="" class="avatar avatar-small">
-            <p>{{$participate['name']}}</p>
+            <img src="{{$participator['avatar_img']}}" alt="" class="avatar avatar-small">
+            <p>{{$participator['name']}}</p>
           </div>
-          <div class="collection-col collection-col-2 count-col">{{$participate['completed_rate']}}%</div>
+          <div class="collection-col collection-col-2 count-col">{{$participator['completed_rate']}}%</div>
           <div class="collection-col rank-col">{{$index}}</div>
         </li>
         @endforeach
@@ -66,3 +66,7 @@
     </div>
 @stop
 
+@section('js')
+  @parent
+  <script src='/js/today.js'></script>
+@stop

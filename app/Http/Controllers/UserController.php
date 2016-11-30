@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Follow;
 use Illuminate\Http\Request;
 use League\Flysystem\Exception;
 
 use App\Models\User;
-use App\Models\Participator;
-use App\DAOs\HealthDAO;
+use App\Logic\HealthLogic;
 
 class UserController extends Controller
 {
-    protected $healthDAO;
+    protected $healthLogic;
 
-    public function __construct(HealthDAO $healthDAO)
+    public function __construct(HealthLogic $healthLogic)
     {
-        $this->healthDAO = $healthDAO;
+        $this->healthLogic = $healthLogic;
     }
 
     // Page
@@ -27,7 +25,7 @@ class UserController extends Controller
                 'password' => 'required'
             ]);
         }catch (Exception $exception){
-            redirect("/login/error/format");
+            return redirect("/login/error/format");
         }
 
         $name = $request->get('username');
@@ -38,12 +36,12 @@ class UserController extends Controller
             $test_password = md5($password);
             if($test_password == $user->password){
                 $request->session()->put('user', $user);
-                redirect("/home");
+                return redirect("/home/today");
             }else{
-                redirect("/login/error/password");
+                return redirect("/login/error/password");
             }
         }else{
-            redirect("/login/error/username");
+            return redirect("/login/error/username");
         }
     }
 
@@ -98,7 +96,6 @@ class UserController extends Controller
             );
         }
         return response()->json($response);
-//        return view('home')->withUser($user);
     }
 
     public function updateUserInfo(Request $request){

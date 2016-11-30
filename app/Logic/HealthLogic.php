@@ -6,12 +6,12 @@
  * Time: 21:15
  */
 
-namespace App\DAOs;
+namespace App\Logic;
 
 use DB;
 
 
-class HealthDAO
+class HealthLogic
 {
     public function friends_data($username,$date,$num){
         $users_data = null;

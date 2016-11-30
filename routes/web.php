@@ -10,16 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get("/", function () {
+    return view('login');
+});
 
-Route::group(['prefix', 'login'], function () {
-    Route::get('/{error}/{type}', function () {
-        return view('pages/login');
+Route::group(['prefix'=>'login'], function () {
+    Route::get('/{error?}/{type?}', function () {
+        return view('pages.login');
     });
 });
 
-Route::group(['prefix', 'register'], function () {
-    Route::get('/{error}/{type}', function () {
-        return view('pages/register');
+Route::group(['prefix'=>'register'], function () {
+    Route::get('/{error?}/{type?}', function () {
+        return view('pages.register');
     });
 });
 
@@ -34,11 +37,12 @@ Route::group(['prefix'=>'user'], function () {
 
 // Home Routes
 Route::group(["prefix"=>'home'], function () {
-    Route::get('/', 'HomeController@today_page')->middleware('login_check');
-    Route::get('today', 'HomeController@today_page')->middleware('login_check');
+    Route::get('/', 'HomeController@today_page')->middleware("login_check");
+    Route::get('today', 'HomeController@today_page')->middleware("login_check");
 });
 
 // Activity Routes
 Route::group(["prefix"=>'activity'], function () {
-    Route::get('{isMine?}', 'ActivityController@activity_page');
+    Route::get('/', 'ActivityController@activity_page')->middleware("login_check");
+    Route::get('/{id}', 'ActivityController@activity_detail_page');
 });
