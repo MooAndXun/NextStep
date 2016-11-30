@@ -20,7 +20,7 @@
           </div>
           <div class="act-info-item">
             <i class="material-icons medium">watch_later</i>
-            <p class="info">剩余 {{$activity['left_hour']}} 小时</p>
+            <p class="info">剩余 {{$activity['left-time']}} 小时</p>
           </div>
           <div class="act-info-item">
             <i class="material-icons medium">monetization_on</i>
@@ -49,24 +49,20 @@
       <ul class="collection">
         <li class="collection-item collection-header">
           <div class="collection-col collection-col-2 user-col"></div>
-          <div class="collection-col collection-col-2 count-col">完成度</div>
+          <div class="collection-col collection-col-2 count-col">目前步数</div>
           <div class="collection-col rank-col">排名</div>
         </li>
         @foreach($participators as $index=>$participator)
         <li class="collection-item">
           <div class="collection-col collection-col-2 user-col">
-            <img src="{{$participator['avatar_img']}}" alt="" class="avatar avatar-small">
-            <p>{{$participator['name']}}</p>
+            <img src="{{$participator['avatar']}}" alt="" class="avatar avatar-small">
+            <p>{{$participator['username']}}</p>
           </div>
-          <div class="collection-col collection-col-2 count-col">{{$participator['completed_rate']}}%</div>
+          <div class="collection-col collection-col-2 count-col">{{$participator['steps']}}</div>
           <div class="collection-col rank-col">{{$index}}</div>
         </li>
         @endforeach
       </ul>
     </div>
-@stop
-
-@section('js')
-  @parent
-  <script src='/js/today.js'></script>
+  </div>
 @stop

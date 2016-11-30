@@ -23,17 +23,28 @@ class ActivityLogic
     public function findParticipatorRank($activity) {
         switch ($activity['type']) {
             CASE '多人竞赛':
-                $rank = DB::select("SELECT user.username, avatar, (CASE WHEN(steps ISNULL) THEN 0 ELSE steps END) AS steps FROM activity__participator
-                              JOIN user ON activity__participator.participator_username = user.username
-                              JOIN (SELECT username, sum(steps) AS steps FROM step WHERE date BETWEEN strftime('%s', :start) AND strftime('%s', :end) GROUP BY username) step ON step.username = user.username
-                            WHERE activity_id = :id
-                            ORDER BY steps", [':id'=>$activity['id'], ":start"=>$activity['start'], ":end"=>$activity['end']]);
+                $ranks = DB::select("SELECT user.username, avatar, (CASE WHEN(steps ISNULL) THEN 0 ELSE steps END) AS steps FROM activity__participator
+                                      JOIN user ON activity__participator.participator_username = user.username
+                                      LEFT JOIN (SELECT username, sum(steps) AS steps FROM step WHERE date BETWEEN strftime('%s', :start) AND strftime('%s', :end) GROUP BY username) step ON step.username = user.username
+                                    WHERE activity_id = :id
+                                    ORDER BY steps;",
+                    [':id'=>$activity['id'], ":start"=>$activity['start'], ":end"=>$activity['end']]);
                 break;
             Default:
-                $rank = [];
+                $ranks = [];
         }
 
-        return $rank;
+        $results = [];
+        foreach ($ranks as $rank) {
+            $result = [
+                "username"=>$rank->username,
+                "avatar"=>$rank->avatar,
+                "steps"=>$rank->steps
+            ];
+            array_push($results,$result);
+        }
+
+        return $results;
     }
 
     public function dealWithActivity($activity) {
