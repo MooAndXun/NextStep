@@ -46,8 +46,7 @@ class ActivityController extends Controller
         return view('pages.activity-detail')->with([
             "activity"=>$activity,
             "participators"=>$participators
-        ]);
-
+        ])->with(['page_name'=>'活动详情', 'tab'=>1, 'sub_tab'=>2]);
     }
 
     // Ajax

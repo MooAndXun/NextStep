@@ -43,7 +43,7 @@ Route::group(["prefix"=>'home'], function () {
 // Activity Routes
 Route::group(["prefix"=>'activity'], function () {
     Route::get('/', 'ActivityController@activity_page')->middleware("login_check");
-    Route::get('{id}', 'ActivityController@activity_detail_page')->where('id', '[0-9]+');;
+    Route::get('{id}', 'ActivityController@activity_detail_page')->where('id', '[0-9]+');
 
     Route::get('join', 'ActivityController@join');
 });

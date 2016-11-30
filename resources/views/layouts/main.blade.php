@@ -23,15 +23,15 @@
     <nav class="page-nav">
       <div class="nav-wrapper">
         <h1 class="brand-logo">NextSTEP</h1>
-        <a href="/template/login.html" class="icon-link"><i class="material-icons white-text circle">account_circle</i></a>
+        <a href="/login" class="icon-link"><i class="material-icons white-text circle">account_circle</i></a>
       </div>
     </nav>
     <div class="nav-content"></div>
     <div class="tabs-wrapper">
       <ul class="tabs nav-tabs">
-        <li class="tab nav-tab"><a href="/index.html" target="_self">首页</a></li>
-        <li class="tab nav-tab"><a href="/template/activity.html" target="_self">活动</a></li>
-        <li class="tab nav-tab"><a href="/template/circle.html" target="_self">圈子</a></li>
+        <li class="tab nav-tab"><a href="/home" target="_self">首页</a></li>
+        <li class="tab nav-tab"><a href="/activity" target="_self">活动</a></li>
+        <li class="tab nav-tab"><a href="/circle" target="_self">圈子</a></li>
       </ul>
     </div>
   </div>
