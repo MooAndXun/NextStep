@@ -21,7 +21,7 @@
     <div class="container">
         <div class="card login-card">
             <div class="title-block">
-                <p>LOG IN</p>
+                <p>登录</p>
                 <div class="square"></div>
                 <div class="triangle"></div>
             </div>
@@ -29,14 +29,14 @@
                 {!! csrf_field() !!}
                 <div class="input-field">
                     <input id="username" name="username" type="text" class="validate">
-                    <label for="username">Username</label>
+                    <label for="username">用户名</label>
                 </div>
                 <div class="input-field">
                     <input id="password" name="password" type="password" class="validate">
-                    <label for="password">Password</label>
+                    <label for="password">密码</label>
                 </div>
-                <p><a href="#">Forgot password?</a></p>
-                <p>Not a member? <a href="#">Sign up now</a></p>
+                <p><a href="#">忘记密码?</a></p>
+                <p>还不是会员? <a href="#">注册</a></p>
                 <div class="invisible"></div>
                 <button type="submit'" class="btn-floating btn-large waves-effect waves-light login-btn"><i class="material-icons">keyboard_arrow_right</i></button>
             </form>

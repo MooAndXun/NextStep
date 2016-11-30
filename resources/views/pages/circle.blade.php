@@ -33,7 +33,7 @@
           </div>
           <div class="act-info-item">
             <i class="material-icons medium">people</i>
-            <p class="info">{{$circle['people_num']}} / {{$circle['people_limit']}} 人</p>
+            <p class="info">{{$circle['people_now']}} / {{$circle['people_num']}} 人</p>
           </div>
           <div class="act-info-item"></div>
           <div class="act-info-item"></div>

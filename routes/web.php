@@ -30,7 +30,6 @@ Route::group(['prefix'=>'register'], function () {
 Route::group(['prefix'=>'user'], function () {
     Route::post('login', 'UserController@login');
     Route::post('register', 'UserController@register');
-
     Route::post('info','UserController@updateUserInfo');
     Route::get('info','UserController@getUserInfo');
 });
@@ -44,5 +43,13 @@ Route::group(["prefix"=>'home'], function () {
 // Activity Routes
 Route::group(["prefix"=>'activity'], function () {
     Route::get('/', 'ActivityController@activity_page')->middleware("login_check");
-    Route::get('/{id}', 'ActivityController@activity_detail_page');
+    Route::get('{id}', 'ActivityController@activity_detail_page')->where('id', '[0-9]+');;
+
+    Route::get('join', 'ActivityController@join');
 });
+
+// Circle Routes
+Route::group(['prefix'=>'circle'], function () {
+    Route::get('/', 'CircleController@circle_page');
+});
+
