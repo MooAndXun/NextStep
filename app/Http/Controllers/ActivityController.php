@@ -51,40 +51,82 @@ class ActivityController extends Controller
 
     // Ajax
     public function create(Request $request){
-        try{
-            $this->validate($request, [
-                'name' => 'required',
-                'start' => 'required',
-                'end' => 'required',
-                'people_num' => 'required|numeric',
-                'type' => 'required',
-                'reward' => 'required',
-                'description' => 'required'
-            ]);
-        }catch (Exception $exception){
-            //TODO
-        }
-        $username = $request->session()->get('username');
+        $this->validate($request, [
+            'name' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'people_num' => 'required|numeric',
+            'type' => 'required',
+            'reward' => 'required',
+            'description' => 'required'
+        ]);
+        $username = session("user")['username'];
+//        $username = "Mike";
         $response = null;
-        if($username){
-            $activity = new Activity();
-            $activity->name = $request->get('name');
-            $activity->start = $request->get('start');
-            $activity->end = $request->get('end');
-            $activity->people_num = $request->get('people_num');
-            $activity->type = $request->get('type');
-            $activity->reward = $request->get('reward');
-            $activity->description = $request->get('description');
+        $activity = new Activity();
+        $activity->name = $request->get('name');
+        $activity->start = $request->get('start');
+        $activity->end = $request->get('end');
+        $activity->people_num = $request->get('people_num');
+        $activity->type = $request->get('type');
+        $activity->reward = $request->get('reward');
+        $activity->description = $request->get('description');
+        $activity->creator_username = $username;
+        $activity->save();
+        $response = array(
+            'status' => 'success',
+            'msg' => '创建成功'
+        );
+        return response()->json($response);
+    }
+
+    //Ajax
+    public function delete(Request $request){
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
+        $username = session("user")["username"];
+//        $username = "Mike";
+        $activity_id = $request->get("id");
+        $response = [];
+        $activity = Activity::find($activity_id);
+        if($activity && ($activity['creator_username'] == $username)){
+            $activity->delete();
+            $response['status'] = 'success';
+            $response['msg'] = '删除成功';
+        }else{
+            $response['status'] = 'failed';
+            $response['msg'] = '权限不足或该活动不存在';
+        }
+        return response()->json($response);
+    }
+
+    //Ajax
+    public function update(Request $request){
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
+        $username = session("user")['username'];
+//        $username = "Mike";
+        $activity_id = $request->get("id");
+        $response = [];
+        $activity = Activity::find($activity_id);
+        if($activity && ($activity['creator_username'] == $username)) {
+            $activity->name = ($request->get('name') =='') ? $activity->name:$request->get('name');
+            $activity->start = ($request->get('start') =='') ? $activity->start:$request->get('start');
+            $activity->end = ($request->get('end') =='') ? $activity->end:$request->get('end');
+            $activity->people_num = ($request->get('people_num') =='') ? $activity->people_num:$request->get('people_num');
+            $activity->type = ($request->get('type') =='') ? $activity->type:$request->get('type');
+            $activity->reward = ($request->get('reward') =='') ? $activity->reward:$request->get('reward');
+            $activity->description = ($request->get('description') =='') ? $activity->description:$request->get('description');
             $activity->save();
             $response = array(
                 'status' => 'success',
-                'msg' => '创建成功'
+                'msg' => '修改成功'
             );
         }else{
-            $response = array(
-                'status' => 'failed',
-                'msg' => '用户未登录'
-            );
+                $response['status'] = 'failed';
+                $response['msg'] = '权限不足或该活动不存在';
         }
         return response()->json($response);
     }

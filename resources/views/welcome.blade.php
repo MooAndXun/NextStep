@@ -95,10 +95,16 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
-                <form action="{{ url('/user/login') }}" method="post">
+                <form action="{{ url('/activity/update') }}" method="post">
                     {!! csrf_field() !!}
-                    <input type="text" name="username"/>
-                    <input type="password" name="password"/>
+                    <input type="text" name="id"/>
+                    {{--<input type="hidden" name="_method" value="DELETE">--}}
+                    <input type="text" name="start"/>
+                    <input type="text" name="end"/>
+                    <input type="text" name="people_num"/>
+                    <input type="text" name="type"/>
+                    <input type="text" name="reward"/>
+                    <input type="text" name="description"/>
                     <input type="submit">
                 </form>
             </div>

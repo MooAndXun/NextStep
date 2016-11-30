@@ -11,7 +11,7 @@
 |
 */
 Route::get("/", function () {
-    return view('login');
+    return view('welcome');
 });
 
 Route::group(['prefix'=>'login'], function () {
@@ -51,6 +51,9 @@ Route::group(["prefix"=>'activity'], function () {
     Route::get('{id}', 'ActivityController@activity_detail_page')->where('id', '[0-9]+');
 
     Route::get('join', 'ActivityController@join');
+    Route::post('/','ActivityController@create')->middleware("login_check");
+    Route::delete('/','ActivityController@delete');
+    Route::post('/update','ActivityController@update')->middleware("login_check");
 });
 
 // Circle Routes
