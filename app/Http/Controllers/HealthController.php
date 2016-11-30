@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SportController extends Controller
+class HealthController extends Controller
 {
     public function getTodayStep(Request $request){
         $username = $request->session()->get('username');

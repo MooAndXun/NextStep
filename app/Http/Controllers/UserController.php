@@ -18,17 +18,8 @@ class UserController extends Controller
     {
         $this->healthDAO = $healthDAO;
     }
-    public function store(Request $request){
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required',
-        ]);
-        $user = new User;
-        $user->nick_name = $request->get('username');
-        $user->password = $request->get('password');
-        return view('home')->withUser($user);
-    }
 
+    // Page
     public function login(Request $request){
         try{
             $this->validate($request, [
@@ -36,7 +27,7 @@ class UserController extends Controller
                 'password' => 'required'
             ]);
         }catch (Exception $exception){
-            //TODO
+            redirect("/login/error/format");
         }
 
         $name = $request->get('username');
@@ -46,41 +37,32 @@ class UserController extends Controller
         if($user){
             $test_password = md5($password);
             if($test_password == $user->password){
-                $request->session()->put('username', $name);
-//                $request->session()->put('avatar', $user->avatar);
-//                return view('pages.mine')->with(['user'=>$user]);
-                return redirect("/home");
+                $request->session()->put('user', $user);
+                redirect("/home");
             }else{
-                $response = array(
-                    'status' => 'failed',
-                    'msg' => '密码错误'
-                );
+                redirect("/login/error/password");
             }
-
         }else{
-            $response = array(
-                'status' => 'failed',
-                'msg' => '该用户不存在'
-            );
+            redirect("/login/error/username");
         }
-
-        return response()->json($response);
     }
 
     public function register(Request $request){
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required'
-        ]);
+        try {
+            $this->validate($request, [
+                'username' => 'required',
+                'password' => 'required'
+            ]);
+        } catch (Exception $exception) {
+            redirect("/register/error/format");
+        }
+
         $name = $request->get('username');
         $password = $request->get('password');
         $response = null;
         $user = User::where('username', $name)->first();
         if($user){
-            $response = array(
-                'status' => 'failed',
-                'msg' => '用户名已经存在'
-            );
+            redirect("/register/error/existed");
         }else{
             $user = new User();
             $user->username = $name;
@@ -88,21 +70,17 @@ class UserController extends Controller
             $user->password = md5($password);
             try{
                 $user->saveOrFail();
-                $response = array(
-                    'status' => 'success',
-                    'msg' => '注册成功'
-                );
+                redirect("/login");
             }catch (Exception $exception){
-                $response = array(
-                    'status' => 'failed',
-                    'msg' => '数据库异常'
-                );
+                redirect("/register/error");
             }
         }
 
         return response()->json($response);
     }
 
+
+    // Ajax
     public function getUserInfo(Request $request){
         $response = null;
         $name = $request->session()->get('username');
@@ -156,48 +134,5 @@ class UserController extends Controller
         return response()->json($response);
     }
 
-    public function followUser(Request $request){
-        $this->validate($request, [
-            'username' => 'required'
-        ]);
-        $response = null;
-        $name = $request->session()->get('username');
-        if($name){
-            $user = User::find($request->get('username'));
-            $own = User::find($name);
-            if($user){
-//                $follow = new Follow();
-//                $follow->follower_username = $name;
-//                $follow->following_username = $user->username;
-//                $follow->save();
-                $own->followings()->save($user);
-                $response = array(
-                    'status' => 'success',
-                    'msg' => '关注成功'
-                );
-            }else{
-                $response = array(
-                    'status' => 'failed',
-                    'msg' => '该用户不存在'
-                );
-            }
 
-        }else{
-            $response = array(
-                'status' => 'failed',
-                'msg' => '用户未登录'
-            );
-        }
-        return response()->json($response);
-    }
-
-    //get
-    public function friends($username){
-        $date=new DateTime();
-        $today = $date->format('Y-m-d');
-        $friend_data = $this->healthDAO->friends_data($username,$today);
-        return view('pages.firend').with([
-            'friends' => $friend_data
-        ]);
-    }
 }

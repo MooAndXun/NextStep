@@ -15,11 +15,11 @@ class LoginCheckMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $username = $request->session()->get('username');
+        $username = $request->session()->get('user')['username'];
         if($username){
             return $next($request);
         }else{
-            return redirect("/");
+            return redirect("/login");
         }
     }
 }

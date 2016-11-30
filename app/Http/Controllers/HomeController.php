@@ -18,9 +18,9 @@ class HomeController extends Controller
         $this->healthDAO = $healthDAO;
     }
 
-    public function mine(Request $request)
+    // Page
+    public function today_page(Request $request)
     {
-//        $user = User::find($request->session()->get('username'));
         $user = User::find('test');
         $date=new DateTime();
         $result = $date->format('Y-m-d');
@@ -32,12 +32,13 @@ class HomeController extends Controller
         foreach($users_data as $data){
             //TODO
         }
-//        print_r ($users_data);
-        return view('pages.mine')->with([
+        return view('pages.today')->with([
             'steps'=>$steps->steps,
             'sleep_hour'=>$sleep_hour,
             'rank'=>1,
             'user_ranks'=>$users_data
         ]);
     }
+
+    // Ajax
 }
