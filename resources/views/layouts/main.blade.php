@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <title>Today</title>
+  <title>{{$page_name}}</title>
   <link rel="stylesheet" href="/css/materialize.css">
   <link rel="stylesheet" href="/css/index.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,6 +15,23 @@
           'csrfToken' => csrf_token(),
       ]); ?>
   </script>
+
+  {{--变量定义--}}
+<?php
+    // Tab表
+    $tab_table = [
+            ['name'=>'首页', 'url'=>'/home', 'sub_tab'=>[
+                ['name'=>'今日', 'url'=>'/home/today'],
+                ['name'=>'运动统计', 'url'=>'/home/stat'],
+                ['name'=>'我的关注', 'url'=>'/follow']]],
+            ['name'=>'活动', 'url'=>'/activity','sub_tab'=>[
+                ['name'=>'所有活动', 'url'=>'/activity'],
+                ['name'=>'我的活动', 'url'=>'/activity?isMine=true']]],
+            ['name'=>'圈子', 'url'=>'/circle','sub_tab'=>[
+                ['name'=>'所有圈子', 'url'=>'/circle'],
+                ['name'=>'我的圈子', 'url'=>'/circle?isMine=true']]]
+    ];
+?>
 </head>
 
 <body>
@@ -29,9 +46,9 @@
     <div class="nav-content"></div>
     <div class="tabs-wrapper">
       <ul class="tabs nav-tabs">
-        <li class="tab nav-tab"><a href="/home" target="_self">首页</a></li>
-        <li class="tab nav-tab"><a href="/activity" target="_self">活动</a></li>
-        <li class="tab nav-tab"><a href="/circle" target="_self">圈子</a></li>
+        @foreach($tab_table as $index=>$tab)
+        <li class="tab nav-tab"><a href="{{$tab['url']}}" class="@if($index===$tab_index){{'active'}}@endif" target="_self">{{$tab['name']}}</a></li>
+        @endforeach
       </ul>
     </div>
   </div>
@@ -58,9 +75,9 @@
 
     <div class="siderbar-nav card">
       <ul class="collection">
-        <li><a href="/index.html" class="collection-item">今日</a></li>
-        <li><a href="/template/stat.html" class="collection-item">运动统计</a></li>
-        <li><a href="/template/friend.html" class="collection-item">我的关注</a></li>
+        @foreach($tab_table[$tab_index]['sub_tab'] as $index=>$tab)
+        <li><a href="{{$tab['url']}}" class="collection-item @if($index===$sub_tab_index){{'active'}}@endif">{{$tab['name']}}</a></li>
+        @endforeach
       </ul>
     </div>
   </div>

@@ -348,10 +348,6 @@ nav.page-nav {
   .login-card .login-form {
     position: relative;
     padding: 0 25px; }
-    .login-card .login-form .input-field label {
-      font-size: 18px; }
-    .login-card .login-form .input-field input:focus + label {
-      font-size: 14px; }
     .login-card .login-form p {
       text-align: center; }
     .login-card .login-form .invisible {
