@@ -59,5 +59,10 @@ Route::group(["prefix"=>'activity'], function () {
 // Circle Routes
 Route::group(['prefix'=>'circle'], function () {
     Route::get('/', 'CircleController@circle_page');
+
+    Route::get('join', 'CircleController@join');
+    Route::post('/','CircleController@create')->middleware("login_check");
+    Route::delete('/','CircleController@delete');
+    Route::post('/update','CircleController@update')->middleware("login_check");
 });
 

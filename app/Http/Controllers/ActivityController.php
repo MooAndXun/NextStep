@@ -87,7 +87,7 @@ class ActivityController extends Controller
     //Ajax
     public function delete(Request $request){
         $this->validate($request, [
-            'id' => 'required',
+            'id' => 'required'
         ]);
         $username = session("user")["username"];
 //        $username = "Mike";
@@ -108,7 +108,7 @@ class ActivityController extends Controller
     //Ajax
     public function update(Request $request){
         $this->validate($request, [
-            'id' => 'required',
+            'id' => 'required'
         ]);
         $username = session("user")['username'];
 //        $username = "Mike";
