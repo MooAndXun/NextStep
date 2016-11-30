@@ -43,6 +43,7 @@ Route::group(['prefix'=>'follow'],function (){
 Route::group(["prefix"=>'home'], function () {
     Route::get('/', 'HomeController@today_page')->middleware("login_check");
     Route::get('today', 'HomeController@today_page')->middleware("login_check");
+    Route::get('stat', 'HomeController@stat_page')->middleware("login_check");
 });
 
 // Activity Routes
