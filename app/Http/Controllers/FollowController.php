@@ -8,14 +8,22 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Logic\HealthLogic;
 
 class FollowController
 {
+    protected $healthLogic;
+    public  function __construct(HealthLogic $logic){
+        $this->healthLogic = $logic;
+    }
     // Page
-    public function friends_page($username){
-        $date=new DateTime();
-        $today = $date->format('Y-m-d');
-        $friend_data = $this->healthDAO->friends_data($username,$today);
+    public function friends_page(Request $request){
+//        $username = session()->get('user')['username'];
+        $username = 'Nick';
+        $today = date("Y-m-d");
+        $friend_data = $this->healthLogic->friends_data($username,$today,null);
+//        echo json_encode($friend_data);
         return view('pages.friend').with([
                 'friends' => $friend_data
             ]);
