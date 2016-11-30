@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class HealthController extends Controller
 {
+    // Page
+
     public function getTodayStep(Request $request){
         $username = $request->session()->get('username');
         $today = date("Y-m-d");

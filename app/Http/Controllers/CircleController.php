@@ -17,9 +17,9 @@ class CircleController extends Controller
     public function circle_page() {
         $circles = Circle::all()->sortByDesc('created_at')->take(10);
 
-        return view('pages.circle')->with([
-            'circles'=>$circles
-        ]);
+        return view('pages.circle')
+            ->with(['circles'=>$circles])
+            ->with(['page_name'=>'所有圈子', 'tab_index'=>2, 'sub_tab_index'=>0]);
     }
 
     // Ajax

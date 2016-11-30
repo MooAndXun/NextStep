@@ -23,7 +23,7 @@
             <p class="name">{{$activity['name']}}</p>
             <p class="intro">{{$activity['start']}} — {{$activity['end']}}</p>
           </div>
-          <a href="/template/activity-detail.html" class="btn btn-second waves-effect waves-light">详情</a>
+          <a href="/activity/{{$activity['id']}}" class="btn btn-second waves-effect waves-light">详情</a>
           <button class="join-btn btn waves-effect waves-light">加入</button>
         </div>
         <div class="act-info">

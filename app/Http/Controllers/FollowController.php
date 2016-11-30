@@ -28,7 +28,9 @@ class FollowController
         $today = date("Y-m-d");
         $friend_data = $this->healthLogic->friends_data($username,$today,null);
         $friend_data = ObjectUtil::object_to_array($friend_data);
-        return view('pages.friend')->with('friends' , $friend_data);
+        return view('pages.friend')
+            ->with('friends' , $friend_data)
+            ->with(['page_name'=>'我的关注', 'tab_index'=>0, 'sub_tab_index'=>2]);
     }
 
 

@@ -58,7 +58,7 @@
   <div class="content-left">
     <div class="user-info-card card">
       <div class="card-content">
-        <img class='avatar' src="/img/person-1.jpg" alt="User">
+        <img class='avatar' src="{{$current_user['avatar']}}" alt="Avatar">
         <div class="data-group info-group">
           <div class="data-item info-item">
             <p>200</p>

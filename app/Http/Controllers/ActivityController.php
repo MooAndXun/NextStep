@@ -28,9 +28,11 @@ class ActivityController extends Controller
 
         if($username) {
             $page_name = '我的活动';
+            $sub_tab_index = 1;
             $activities = Activity::where("creator_username", $username);
         } else {
             $page_name = '所有活动';
+            $sub_tab_index = 0;
             $activities = Activity::all()->sortByDesc("start");
         }
 
@@ -40,7 +42,7 @@ class ActivityController extends Controller
 
         return view('pages.activity')
             ->with("activities", $activities)
-            ->with(['page_name'=>$page_name, 'tab_index'=>1, 'sub_tab_index'=>-1]);
+            ->with(['page_name'=>$page_name, 'tab_index'=>1, 'sub_tab_index'=>$sub_tab_index]);
     }
 
     public function activity_detail_page(Request $request, $id) {
