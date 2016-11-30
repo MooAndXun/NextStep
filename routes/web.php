@@ -11,18 +11,34 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages/login');
+Route::group(['prefix', 'login'], function () {
+    Route::get('/{error}/{type}', function () {
+        return view('pages/login');
+    });
 });
 
-Auth::routes();
+Route::group(['prefix', 'register'], function () {
+    Route::get('/{error}/{type}', function () {
+        return view('pages/register');
+    });
+});
 
-Route::get('/home', 'HomeController@mine')->middleware('login_check');
+// User Routes
+Route::group(['prefix'=>'user'], function () {
+    Route::post('login', 'UserController@login');
+    Route::post('register', 'UserController@register');
 
-Route::post('/user/login', 'UserController@login');
-Route::post('/user/register', 'UserController@register');
-Route::post('/user/info','UserController@updateUserInfo');
-Route::get('/user/info','UserController@getUserInfo');
+    Route::post('info','UserController@updateUserInfo');
+    Route::get('info','UserController@getUserInfo');
+});
 
+// Home Routes
+Route::group(["prefix"=>'home'], function () {
+    Route::get('/', 'HomeController@today_page')->middleware('login_check');
+    Route::get('today', 'HomeController@today_page')->middleware('login_check');
+});
 
-Route::get('/activity/{isMine?}', 'ActivityController@activity_page');
+// Activity Routes
+Route::group(["prefix"=>'activity'], function () {
+    Route::get('{isMine?}', 'ActivityController@activity_page');
+});
