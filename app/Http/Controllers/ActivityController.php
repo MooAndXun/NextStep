@@ -27,8 +27,10 @@ class ActivityController extends Controller
         }
 
         if($username) {
+            $page_name = '我的活动';
             $activities = Activity::where("creator_username", $username);
         } else {
+            $page_name = '所有活动';
             $activities = Activity::all()->sortByDesc("start");
         }
 
@@ -36,7 +38,9 @@ class ActivityController extends Controller
             $activity = $this->activityLogic->dealWithActivity($activity);
         }
 
-        return view('pages.activity')->with("activities", $activities);
+        return view('pages.activity')
+            ->with("activities", $activities)
+            ->with(['page_name'=>$page_name, 'tab_index'=>1, 'sub_tab_index'=>-1]);
     }
 
     public function activity_detail_page(Request $request, $id) {
@@ -46,7 +50,7 @@ class ActivityController extends Controller
         return view('pages.activity-detail')->with([
             "activity"=>$activity,
             "participators"=>$participators
-        ])->with(['page_name'=>'活动详情', 'tab'=>1, 'sub_tab'=>2]);
+        ])->with(['page_name'=>'活动详情', 'tab_index'=>1, 'sub_tab_index'=>-1]);
     }
 
     // Ajax

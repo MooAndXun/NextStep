@@ -8,6 +8,7 @@
 
 namespace App\Logic;
 
+use App\Utils\ObjectUtil;
 use DB;
 
 
@@ -27,6 +28,11 @@ class HealthLogic
                                     JOIN step ON step.username = following.username
                                     WHERE step."date" = :date
                                   ORDER BY step.steps', [':username'=>$username,':date'=>$date]);
+        }
+
+        $users_data = ObjectUtil::object_to_array($users_data);
+        foreach($users_data as $data){
+            $data = ObjectUtil::object_to_array($data);
         }
         return $users_data;
     }

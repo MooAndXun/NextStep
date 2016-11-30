@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Utils\ObjectUtil;
 use Illuminate\Http\Request;
 
 use DateTime;
@@ -27,19 +28,18 @@ class HomeController extends Controller
         $result = $date->format('Y-m-d');
         $steps = $user->steps()->where('date',$result)->first();
         $sleep = $user->sleep()->where('date',$result)->first();
-        $sleep_hour = ($sleep->sleep_minutes)/60;
+        $sleep_hour = ($sleep->sleep_minutes) / 60;
         $users_data = $this->healthLogic->friends_data($user->username,$result,10);
         $rank = $this->healthLogic->user_step_rank($user->username,$steps->steps,$result);
-        foreach($users_data as $data){
-            //TODO
-        }
 
-        return view('pages.today')->with([
-            'steps'=>$steps->steps,
-            'sleep_hour'=>$sleep_hour,
-            'rank'=>1,
-            'user_ranks'=>$users_data
-        ]);
+        return view('pages.today')
+            ->with([
+                'steps'=>$steps->steps,
+                'sleep_hour'=>$sleep_hour,
+                'rank'=>1,
+                'user_ranks'=>$users_data
+            ])
+            ->with(['page_name'=>'今日', 'tab_index'=>0, 'sub_tab_index'=>0]);
     }
 
     // Ajax
