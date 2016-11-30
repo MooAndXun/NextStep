@@ -42,7 +42,6 @@ class ActivityController extends Controller
     public function activity_detail_page(Request $request, $id) {
         $activity = $this->activityLogic->findSimpleActivity($id);
         $participators = $this->activityLogic->findParticipatorRank($activity);
-        echo json_encode($participators);
 
         return view('pages.activity-detail')->with([
             "activity"=>$activity,
@@ -89,5 +88,13 @@ class ActivityController extends Controller
             );
         }
         return response()->json($response);
+    }
+
+    public function join(Request $request) {
+        $username = $request->get("username");
+        $activity_id = $request->get("activity_id");
+
+        $activity = Activity::find($activity_id);
+        $activity->participators()->attach($username, ['created_at'=>date('Y-m-d',time())]);
     }
 }
