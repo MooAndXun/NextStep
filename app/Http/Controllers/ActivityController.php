@@ -28,9 +28,11 @@ class ActivityController extends Controller
 
         if($username) {
             $page_name = '我的活动';
-            $activities = Activity::where("creator_username", $username);
+            $sub_tab_index = 1;
+            $activities = Activity::where("creator_username", $username)->get();
         } else {
             $page_name = '所有活动';
+            $sub_tab_index = 0;
             $activities = Activity::all()->sortByDesc("start");
         }
 
@@ -40,7 +42,7 @@ class ActivityController extends Controller
 
         return view('pages.activity')
             ->with("activities", $activities)
-            ->with(['page_name'=>$page_name, 'tab_index'=>1, 'sub_tab_index'=>-1]);
+            ->with(['page_name'=>$page_name, 'tab_index'=>1, 'sub_tab_index'=>$sub_tab_index]);
     }
 
     public function activity_detail_page(Request $request, $id) {
@@ -135,11 +137,12 @@ class ActivityController extends Controller
         return response()->json($response);
     }
 
-    public function join(Request $request) {
-        $username = $request->get("username");
-        $activity_id = $request->get("activity_id");
-
-        $activity = Activity::find($activity_id);
+    public function join(Request $request, $id, $username) {
+        $activity = Activity::find($id);
         $activity->participators()->attach($username, ['created_at'=>date('Y-m-d',time())]);
+
+        $response = [];
+        $response['status'] = 'success';
+        return redirect('/activity');
     }
 }

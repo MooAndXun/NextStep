@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get("/", function () {
     return view('welcome');
 });
@@ -43,6 +44,7 @@ Route::group(['prefix'=>'follow'],function (){
 Route::group(["prefix"=>'home'], function () {
     Route::get('/', 'HomeController@today_page')->middleware("login_check");
     Route::get('today', 'HomeController@today_page')->middleware("login_check");
+    Route::get('stat', 'HomeController@stat_page')->middleware("login_check");
 });
 
 // Activity Routes
@@ -50,7 +52,7 @@ Route::group(["prefix"=>'activity'], function () {
     Route::get('/', 'ActivityController@activity_page')->middleware("login_check");
     Route::get('{id}', 'ActivityController@activity_detail_page')->where('id', '[0-9]+');
 
-    Route::get('join', 'ActivityController@join');
+    Route::post('join/{id}/{username}', 'ActivityController@join');
     Route::post('/','ActivityController@create')->middleware("login_check");
     Route::delete('/','ActivityController@delete');
     Route::post('/update','ActivityController@update')->middleware("login_check");
@@ -59,10 +61,16 @@ Route::group(["prefix"=>'activity'], function () {
 // Circle Routes
 Route::group(['prefix'=>'circle'], function () {
     Route::get('/', 'CircleController@circle_page');
+    Route::get('/{id}', 'CircleController@circle_detail_page')->where('id', '[0-9]+');
 
-    Route::get('join', 'CircleController@join');
+    Route::post('join/{id}/{username}', 'CircleController@join');
     Route::post('/','CircleController@create')->middleware("login_check");
     Route::delete('/','CircleController@delete');
     Route::post('/update','CircleController@update')->middleware("login_check");
 });
 
+// Permission Routes
+Route::group(['prefix'=>'permission'], function () {
+    Route::get('/', 'PermissionController@permission_manage_page');
+    Route::get('management', 'PermissionController@permission_manage_page');
+});

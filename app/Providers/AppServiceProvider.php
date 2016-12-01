@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Config\Constant;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // View 共享数据
-        view()->share(['current_user'=>session('user')]);
+        view()->composer('*',function($view){
+            $view->with('current_user',Session::get('user'));
+        });
     }
 
     /**

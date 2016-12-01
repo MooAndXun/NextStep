@@ -23,23 +23,28 @@ class HomeController extends Controller
     public function today_page(Request $request)
     {
         $user = session('user');
-
         $date=new DateTime();
         $result = $date->format('Y-m-d');
         $steps = $user->steps()->where('date',$result)->first();
         $sleep = $user->sleep()->where('date',$result)->first();
-        $sleep_hour = ($sleep->sleep_minutes) / 60;
+        $sleep_hour = (int)(($sleep->sleep_minutes) / 60);
         $users_data = $this->healthLogic->friends_data($user->username,$result,10);
-        $rank = $this->healthLogic->user_step_rank($user->username,$steps->steps,$result);
+        $rank = $this->healthLogic->user_step_rank($user->username,$steps->steps,$result)[0]->rank;
 
         return view('pages.today')
             ->with([
                 'steps'=>$steps->steps,
                 'sleep_hour'=>$sleep_hour,
-                'rank'=>1,
+                'rank'=>$rank,
                 'user_ranks'=>$users_data
             ])
             ->with(['page_name'=>'今日', 'tab_index'=>0, 'sub_tab_index'=>0]);
+    }
+
+    public function stat_page(Request $request) {
+
+        return view('pages.stat')
+            ->with(['page_name'=>'运动统计', 'tab_index'=>0, 'sub_tab_index'=>1]);
     }
 
     // Ajax

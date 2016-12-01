@@ -17,9 +17,16 @@ class CircleController extends Controller
     public function circle_page() {
         $circles = Circle::all()->sortByDesc('created_at')->take(10);
 
-        return view('pages.circle')->with([
-            'circles'=>$circles
-        ]);
+        return view('pages.circle')
+            ->with(['circles'=>$circles])
+            ->with(['page_name'=>'所有圈子', 'tab_index'=>2, 'sub_tab_index'=>0]);
+    }
+
+    public function circle_detail_page() {
+        $circles = Circle::all()->sortByDesc('created_at')->take(10);
+
+        return view('pages.circle-detail')
+            ->with(['page_name'=>'圈子详情', 'tab_index'=>2, 'sub_tab_index'=>-1]);
     }
 
     // Ajax
@@ -94,12 +101,11 @@ class CircleController extends Controller
         return response()->json($response);
     }
 
-    public function join(Request $request) {
-//        $username = $request->get("username");
-        $username = "Amy";
-        $circle_id = $request->get("circle_id");
-
-        $circle = Circle::find($circle_id);
+    public function join(Request $request, $id, $username) {
+        $id = $request->get("circle_id");
+        $circle = Circle::find($id);
         $circle->members()->attach($username, ['created_at'=>date('Y-m-d',time())]);
+
+        return redirect('/circle');
     }
 }

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>Activity</title>
+  <link rel="stylesheet" href="/css/materialize.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="header-wrapper">
+      <nav class="page-nav">
+        <div class="nav-wrapper">
+          <h1 class="brand-logo">NextSTEP</h1>
+        </div>
+      </nav>
+      <div class="nav-content"></div>
+      <div class="tabs-wrapper">
+        <ul class="tabs nav-tabs">
+          <li class="tab nav-tab"><a href="/index.html" target="_self">首页</a></li>
+          <li class="tab nav-tab"><a class='active' href="/template/activity.html" target="_self">活动</a></li>
+          <li class="tab nav-tab"><a href="/template/circle.html" target="_self">圈子</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="content-left">
+      <div class="user-info-card card">
+        <div class="card-content">
+          <img class='avatar' src="/img/person-1.jpg" alt="User">
+          <div class="data-group info-group">
+            <div class="data-item info-item">
+              <p>200</p>
+              <p class="data-item-name info-item-name">关注</p>
+            </div>
+            <div class="divider"></div>
+            <div class="data-item info-item">
+              <p>30</p>
+              <p class="data-item-name info-item-name">活动</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="siderbar-nav card">
+        <ul class="collection">
+          <li><a href="/template/activity.html" class="collection-item">所有活动</a></li>
+          <li><a href="/template/activity.html" class="collection-item">我的活动</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="card-group act-card-group">
+        <div class="card act-card">
+          <div class="card-content">
+            <div class="act-snap">
+              <img src="/img/person-3.jpg" alt="Avatar" class="avatar">
+              <div class="act-snap-info">
+                <p class="name">乐跑俱乐部</p>
+                <p class="intro">和我们一起乐跑吧</p>
+              </div>
+              <button class="join-btn btn waves-effect waves-light">加入</button>
+            </div>
+            <div class="act-info">
+              <div class="act-info-item">
+                <i class="material-icons medium">watch_later</i>
+                <p class="info">创建于 2016/10/20</p>
+              </div>
+              <div class="act-info-item">
+                <i class="material-icons medium">people</i>
+                <p class="info">3 / 16 人</p>
+              </div>
+
+              <div class="act-info-item"></div>
+              <div class="act-info-item"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <ul class="tabs">
+            <li class="tab"><a href="#">成员动态</a></li>
+            <li class="tab"><a href="#">讨论区</a></li>
+          </ul>
+        </div>
+
+        <div class="card-group friend-card-group">
+          <div class="card friend-card">
+            <div class="card-content">
+              <img src="../img/person-2.jpg" alt="Avatar" class="avatar">
+              <div class="user-info">
+                <p class="name">Arron Hunt</p>
+                <p class="intro">今天一共步行了 <b>8000</b> 步</p>
+              </div>
+              <div class="icon-info">
+                <button class="join-btn btn waves-effect waves-light">点赞</button>
+              </div>
+            </div>
+          </div>
+          <div class="card friend-card">
+            <div class="card-content">
+              <img src="../img/person-2.jpg" alt="Avatar" class="avatar">
+              <div class="user-info">
+                <p class="name">Mike</p>
+                <p class="intro">刚刚加入了活动 <b>南京马拉松</b></p>
+              </div>
+              <div class="icon-info">
+                <button class="join-btn btn waves-effect waves-light">加入</button>
+              </div>
+            </div>
+          </div>
+          <div class="card friend-card">
+            <div class="card-content">
+              <img src="../img/person-2.jpg" alt="Avatar" class="avatar">
+              <div class="user-info">
+                <p class="name">Nick</p>
+                <p class="intro">刚刚加入了圈子 <b>跑步圈</b></p>
+              </div>
+              <div class="icon-info">
+                <button class="join-btn btn waves-effect waves-light">加入</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer class="page-footer">
+    <p class="center">Made with love by Moo © 2016 Nextstep</p>
+  </footer>
+</body>
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src='/js/materialize.js'></script>
+<script src='/js/echarts.common.min.js'></script>
+<script src='/js/sport.js'></script>
+
+</html>
