@@ -5,7 +5,7 @@
     @foreach($friends as $friend)
     <div class="card friend-card">
       <div class="card-content">
-        <img src="{{$friend['avatar_img']}}" alt="Avatar" class="avatar">
+        <img src="{{'img/user_avatar/'.$friend['avatar_img']}}" alt="Avatar" class="avatar">
         <div class="user-info">
           <p class="name">{{$friend['nick_name']}}</p>
           <p class="intro">{{$friend['description']}}</p>

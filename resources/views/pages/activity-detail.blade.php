@@ -6,7 +6,7 @@
       <div class="card-content">
         <div class="card-title">活动信息</div>
         <div class="act-snap">
-          <img src="/img/person-3.jpg" alt="Avatar" class="avatar">
+          <img src="{{'/img/activity_avatar/'.$activity['avatar']}}" alt="Avatar" class="avatar">
           <div class="act-snap-info">
             <p class="name">{{$activity['name']}}</p>
             <p class="intro">{{$activity['start']}} — {{$activity['end']}}</p>
@@ -55,7 +55,7 @@
         @foreach($participators as $index=>$participator)
         <li class="collection-item">
           <div class="collection-col collection-col-2 user-col">
-            <img src="{{$participator['avatar']}}" alt="" class="avatar avatar-small">
+            <img src="{{'/img/user_avatar/'.$participator['avatar']}}" alt="" class="avatar avatar-small">
             <p>{{$participator['username']}}</p>
           </div>
           <div class="collection-col collection-col-2 count-col">{{$participator['steps']}}</div>

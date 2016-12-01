@@ -18,12 +18,12 @@
     <div class="card act-card">
       <div class="card-content">
         <div class="act-snap">
-          <img src="{{$activity['avatar_img']}}" alt="Avatar" class="avatar">
+          <img src="{{'/img/activity_avatar/'.$activity['avatar']}}" alt="Avatar" class="avatar">
           <div class="act-snap-info">
             <p class="name">{{$activity['name']}}</p>
             <p class="intro">{{$activity['start']}} — {{$activity['end']}}</p>
           </div>
-          <a href="/activity/{{$activity['id']}}" class="btn btn-second waves-effect waves-light">详情</a>
+          <button onclick="window.location.href = '/activity/{{$activity['id']}}'" class="btn btn-second waves-effect waves-light">详情</button>
           <button class="join-btn btn waves-effect waves-light">加入</button>
         </div>
         <div class="act-info">

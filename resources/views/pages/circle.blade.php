@@ -18,12 +18,12 @@
     <div class="card act-card">
       <div class="card-content">
         <div class="act-snap">
-          <img src="{{$circle['avatar_img']}}" alt="Avatar" class="avatar">
+          <img src="{{'img/circle_avatar/'.$circle['avatar']}}" alt="Avatar" class="avatar">
           <div class="act-snap-info">
             <p class="name">{{$circle['name']}}</p>
             <p class="intro">{{$circle['description']}}</p>
           </div>
-          <a href="/template/activity-detail.html" class="btn btn-second waves-effect waves-light">详情</a>
+          <button onclick="window.location.href = '/circle/{{$circle['id']}}'" class="btn btn-second waves-effect waves-light">详情</button>
           <button class="join-btn btn waves-effect waves-light">加入</button>
         </div>
         <div class="act-info">
