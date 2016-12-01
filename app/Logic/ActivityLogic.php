@@ -63,4 +63,14 @@ class ActivityLogic
         }
         return $activity;
     }
+
+    public function checkIsJoin($username,$activity_id)
+    {
+        $activity = Activity::find($activity_id);
+        $user = $activity->participators()->where('participator_username', $username)->get();
+        if($user){
+            return true;
+        }
+        return false;
+    }
 }

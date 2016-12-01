@@ -10,16 +10,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Circle;
+use App\Logic\CircleLogic;
 
 class CircleController extends Controller
 {
-    // Page
-    public function circle_page() {
-        $circles = Circle::all()->sortByDesc('created_at')->take(10);
+    protected $circleLogic;
 
+    public function __construct(CircleLogic $circleLogic)
+    {
+        $this->circleLogic = $circleLogic;
+    }
+
+    // Page
+    public function circle_page(Request $request) {
+        $isMine = $request->get("isMine");
+        $username = session('user')['username'];
+        if($isMine){
+            $page_name = '我的圈子';
+            $sub_tab_index = 1;
+            $circles = Circle::where("creator_username", $username)->get();
+        }else{
+            $page_name = '所有圈子';
+            $sub_tab_index = 0;
+            $circles = Circle::all()->sortByDesc('created_at')->take(10);
+        }
+
+        foreach ($circles as $circle) {
+            $circle['is_join'] = $this->circleLogic->checkIsJoin($username,$circle['id']);
+        }
         return view('pages.circle')
             ->with(['circles'=>$circles])
-            ->with(['page_name'=>'所有圈子', 'tab_index'=>2, 'sub_tab_index'=>0]);
+            ->with(['page_name'=>$page_name, 'tab_index'=>2, 'sub_tab_index'=>$sub_tab_index]);
     }
 
     public function circle_detail_page() {

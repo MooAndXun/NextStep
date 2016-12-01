@@ -19,18 +19,14 @@ class ActivityController extends Controller
     // Page
     public function activity_page(Request $request) {
         $isMine = $request->get("isMine");
-
+        $username = session("user")['username'];
+//        $username = "Mike";
         if($isMine) {
-            $username = session("user")['username'];
-        } else {
-            $username = null;
-        }
-
-        if($username) {
             $page_name = '我的活动';
             $sub_tab_index = 1;
             $activities = Activity::where("creator_username", $username)->get();
         } else {
+//            $username = null;
             $page_name = '所有活动';
             $sub_tab_index = 0;
             $activities = Activity::all()->sortByDesc("start");
@@ -38,6 +34,7 @@ class ActivityController extends Controller
 
         foreach ($activities as $activity) {
             $activity = $this->activityLogic->dealWithActivity($activity);
+            $activity['is_join'] = $this->activityLogic->checkIsJoin($username,$activity['id']);
         }
 
         return view('pages.activity')
