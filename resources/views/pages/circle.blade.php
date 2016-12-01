@@ -24,7 +24,10 @@
             <p class="intro">{{$circle['description']}}</p>
           </div>
           <button onclick="window.location.href = '/circle/{{$circle['id']}}'" class="btn btn-second waves-effect waves-light">详情</button>
-          <button class="join-btn btn waves-effect waves-light">加入</button>
+          <form name='joinForm{{$circle['id']}}' action = "/circle/join/{{$circle['id']}}/{{$current_user['username']}}" method="post">
+            {!! csrf_field() !!}
+            <button type='submit' class="btn btn-pink join-btn waves-effect waves-light">加入</button>
+          </form>
         </div>
         <div class="act-info">
           <div class="act-info-item">

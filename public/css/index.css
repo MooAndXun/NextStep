@@ -55,6 +55,12 @@ i.material-icons {
   width: 90px;
   height: 33px; }
 
+.btn-pink {
+  background-color: #F09886;
+  font-size: 14px; }
+  .btn-pink:hover {
+    background-color: #f8d2ca; }
+
 .btn-second {
   background-color: #fff;
   color: #4C535D; }
@@ -253,11 +259,6 @@ nav.page-nav {
           margin: 0 10px; }
         .container .content .act-card-group .act-card .card-content .act-snap .btn {
           margin-left: 10px; }
-        .container .content .act-card-group .act-card .card-content .act-snap .join-btn {
-          background-color: #F09886;
-          font-size: 14px; }
-          .container .content .act-card-group .act-card .card-content .act-snap .join-btn:hover {
-            background-color: #f8d2ca; }
       .container .content .act-card-group .act-card .card-content .act-info {
         display: flex;
         flex-direction: row;
@@ -303,11 +304,38 @@ nav.page-nav {
     .container .content .stat-line-card .sum-data-group .data-item {
       flex-grow: 1; }
 
+@media screen and (max-width: 800px) {
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%; }
+  header {
+    width: auto;
+    background-size: 100%; }
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch; }
+    .container .content-left {
+      flex-grow: 0;
+      width: auto;
+      margin: 0 80px; }
+    .container .content {
+      width: auto;
+      margin: 0 auto; } }
+
 .login-card {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  /* IE 9 */
+  -moz-transform: translateX(-50%) translateY(-50%);
+  /* Firefox */
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  /* Safari 和 Chrome */
+  -o-transform: translateX(-50%) translateY(-50%);
   width: 320px; }
   .login-card .title-block {
     position: relative;

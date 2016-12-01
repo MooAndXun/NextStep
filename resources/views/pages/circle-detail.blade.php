@@ -7,19 +7,22 @@
         <div class="act-snap">
           <img src="/img/circle_avatar/circle-1.jpg" alt="Avatar" class="avatar">
           <div class="act-snap-info">
-            <p class="name">乐跑俱乐部</p>
-            <p class="intro">和我们一起乐跑吧</p>
+            <p class="name">马拉松爱好者</p>
+            <p class="intro">近期目标：南马</p>
           </div>
-          <button class="join-btn btn waves-effect waves-light">加入</button>
+          <form method="post">
+            {!! csrf_field() !!}
+            <button type='submit' class="btn btn-pink join-btn waves-effect waves-light">加入</button>
+          </form>
         </div>
         <div class="act-info">
           <div class="act-info-item">
             <i class="material-icons medium">watch_later</i>
-            <p class="info">创建于 2016/10/20</p>
+            <p class="info">创建于 2016-10-10</p>
           </div>
           <div class="act-info-item">
             <i class="material-icons medium">people</i>
-            <p class="info">3 / 16 人</p>
+            <p class="info">10 / 60人</p>
           </div>
 
           <div class="act-info-item"></div>

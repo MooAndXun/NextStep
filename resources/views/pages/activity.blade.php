@@ -24,7 +24,10 @@
             <p class="intro">{{$activity['start']}} — {{$activity['end']}}</p>
           </div>
           <button onclick="window.location.href = '/activity/{{$activity['id']}}'" class="btn btn-second waves-effect waves-light">详情</button>
-          <button class="join-btn btn waves-effect waves-light">加入</button>
+          <form name='joinForm{{$activity['id']}}' action = "/activity/join/{{$activity['id']}}/{{$current_user['username']}}" method="post">
+            {!! csrf_field() !!}
+            <button type='submit' class="btn btn-pink join-btn waves-effect waves-light">加入</button>
+          </form>
         </div>
         <div class="act-info">
           <div class="act-info-item">
@@ -52,5 +55,5 @@
 
 @section('js')
   @parent
-  <script src='/js/today.js'></script>
+  <script src='/js/activity.js'></script>
 @stop

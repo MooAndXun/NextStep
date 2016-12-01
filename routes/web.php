@@ -52,7 +52,7 @@ Route::group(["prefix"=>'activity'], function () {
     Route::get('/', 'ActivityController@activity_page')->middleware("login_check");
     Route::get('{id}', 'ActivityController@activity_detail_page')->where('id', '[0-9]+');
 
-    Route::get('join', 'ActivityController@join');
+    Route::post('join/{id}/{username}', 'ActivityController@join');
     Route::post('/','ActivityController@create')->middleware("login_check");
     Route::delete('/','ActivityController@delete');
     Route::post('/update','ActivityController@update')->middleware("login_check");
@@ -63,7 +63,7 @@ Route::group(['prefix'=>'circle'], function () {
     Route::get('/', 'CircleController@circle_page');
     Route::get('/{id}', 'CircleController@circle_detail_page')->where('id', '[0-9]+');
 
-    Route::get('join', 'CircleController@join');
+    Route::post('join/{id}/{username}', 'CircleController@join');
     Route::post('/','CircleController@create')->middleware("login_check");
     Route::delete('/','CircleController@delete');
     Route::post('/update','CircleController@update')->middleware("login_check");

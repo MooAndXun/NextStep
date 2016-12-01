@@ -101,12 +101,11 @@ class CircleController extends Controller
         return response()->json($response);
     }
 
-    public function join(Request $request) {
-//        $username = $request->get("username");
-        $username = "Amy";
-        $circle_id = $request->get("circle_id");
-
-        $circle = Circle::find($circle_id);
+    public function join(Request $request, $id, $username) {
+        $id = $request->get("circle_id");
+        $circle = Circle::find($id);
         $circle->members()->attach($username, ['created_at'=>date('Y-m-d',time())]);
+
+        return redirect('/circle');
     }
 }

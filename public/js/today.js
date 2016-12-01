@@ -32,7 +32,7 @@ function stepChart() {
         }
       },
       data: [{
-        value: 5000,
+        value: 7919,
         name: '已完成',
         itemStyle: {
           normal: {
@@ -40,7 +40,7 @@ function stepChart() {
           }
         }
       }, {
-        value: 3000,
+        value: 1081,
         itemStyle: {
           normal: {
             color: '#fafafa',
@@ -85,14 +85,14 @@ function sleepChart() {
         }
       },
       data: [{
-        value: 3000,
+        value: 8000,
         itemStyle: {
           normal: {
             color: '#f09886',
           }
         }
       }, {
-        value: 5000,
+        value: 500,
         itemStyle: {
           normal: {
             color: '#fafafa',

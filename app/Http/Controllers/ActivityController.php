@@ -29,7 +29,7 @@ class ActivityController extends Controller
         if($username) {
             $page_name = '我的活动';
             $sub_tab_index = 1;
-            $activities = Activity::where("creator_username", $username);
+            $activities = Activity::where("creator_username", $username)->get();
         } else {
             $page_name = '所有活动';
             $sub_tab_index = 0;
@@ -137,11 +137,12 @@ class ActivityController extends Controller
         return response()->json($response);
     }
 
-    public function join(Request $request) {
-        $username = $request->get("username");
-        $activity_id = $request->get("activity_id");
-
-        $activity = Activity::find($activity_id);
+    public function join(Request $request, $id, $username) {
+        $activity = Activity::find($id);
         $activity->participators()->attach($username, ['created_at'=>date('Y-m-d',time())]);
+
+        $response = [];
+        $response['status'] = 'success';
+        return redirect('/activity');
     }
 }

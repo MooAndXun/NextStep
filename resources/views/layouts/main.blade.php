@@ -24,8 +24,8 @@
             ['name' => '今日', 'url' => '/home/today'],
             ['name' => '运动统计', 'url' => '/home/stat'],
             ['name' => '运动动态', 'url' => '/follow'],
-            ['name' => '我的活动', 'url' => '/follow'],
-            ['name' => '我的圈子', 'url' => '/follow'],
+            ['name' => '我的活动', 'url' => '/activity?isMine=true'],
+            ['name' => '我的圈子', 'url' => '/circle?isMine=true'],
             ['name' => '我的关注', 'url' => '/follow']]],
         ['name' => '活动', 'url' => '/activity', 'sub_tab' => [
             ['name' => '所有活动', 'url' => '/activity'],
@@ -115,6 +115,10 @@
 </body>
 
 @section('js')
+  <script>
+    var username = "{{$current_user['username']}}";
+  </script>
+
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script src='/js/materialize.js'></script>
   <script src='/js/echarts.common.min.js'></script>

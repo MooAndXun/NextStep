@@ -8,6 +8,7 @@
 
 namespace App\Logic;
 
+use App\Models\Step;
 use App\Utils\ObjectUtil;
 use DB;
 
@@ -21,13 +22,13 @@ class HealthLogic
                                     JOIN user following ON follow.following_username = following.username
                                     JOIN step ON step.username = following.username
                                     WHERE step."date" = :date
-                                  ORDER BY step.steps LIMIT :num', [':username'=>$username,':date'=>$date, ':num'=>$num]);
+                                  ORDER BY step.steps DESC LIMIT :num', [':username'=>$username,':date'=>$date, ':num'=>$num]);
         }else{
             $users_data = DB::select('SELECT nick_name,avatar as avatar_img,description,step.steps as steps FROM (SELECT * FROM follow WHERE follower_username = :username) follow
                                     JOIN user following ON follow.following_username = following.username
                                     JOIN step ON step.username = following.username
                                     WHERE step."date" = :date
-                                  ORDER BY step.steps', [':username'=>$username,':date'=>$date]);
+                                  ORDER BY step.steps DESC', [':username'=>$username,':date'=>$date]);
         }
 
         $users_data = ObjectUtil::object_to_array($users_data);
@@ -46,5 +47,8 @@ class HealthLogic
         return $rank;
     }
 
-
+    public function findTodayStep($username) {
+        $data = Step::where(['username'=>$username, 'date'=>date('Y-m-d')])->first();
+        return $data;
+    }
 }
