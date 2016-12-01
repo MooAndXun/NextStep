@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get("/", function () {
     return view('welcome');
 });
@@ -60,6 +61,7 @@ Route::group(["prefix"=>'activity'], function () {
 // Circle Routes
 Route::group(['prefix'=>'circle'], function () {
     Route::get('/', 'CircleController@circle_page');
+    Route::get('/{id}', 'CircleController@circle_detail_page')->where('id', '[0-9]+');
 
     Route::get('join', 'CircleController@join');
     Route::post('/','CircleController@create')->middleware("login_check");
@@ -67,3 +69,8 @@ Route::group(['prefix'=>'circle'], function () {
     Route::post('/update','CircleController@update')->middleware("login_check");
 });
 
+// Permission Routes
+Route::group(['prefix'=>'permission'], function () {
+    Route::get('/', 'PermissionController@permission_manage_page');
+    Route::get('management', 'PermissionController@permission_manage_page');
+});

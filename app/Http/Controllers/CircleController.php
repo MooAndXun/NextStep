@@ -22,6 +22,13 @@ class CircleController extends Controller
             ->with(['page_name'=>'所有圈子', 'tab_index'=>2, 'sub_tab_index'=>0]);
     }
 
+    public function circle_detail_page() {
+        $circles = Circle::all()->sortByDesc('created_at')->take(10);
+
+        return view('pages.circle-detail')
+            ->with(['page_name'=>'圈子详情', 'tab_index'=>2, 'sub_tab_index'=>-1]);
+    }
+
     // Ajax
     public function create(Request $request){
         $this->validate($request, [
