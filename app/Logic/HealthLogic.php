@@ -51,4 +51,10 @@ class HealthLogic
         $data = Step::where(['username'=>$username, 'date'=>date('Y-m-d')])->first();
         return $data;
     }
+    public function getAverStep($username){
+        $aver = DB::select('SELECT (sum(steps)/count(*)) AS aver FROM step WHERE username = :username',['username'=>$username]);
+        return $aver->aver;
+//        echo json_encode(2$aver);
+//        return 40404;
+    }
 }

@@ -21,3 +21,5 @@ Route::get('/user', function (Request $request) {
 Route::group(["prefix"=>'activity'], function () {
 
 });
+
+Route::get('/wearable',"WearableController@healthData");

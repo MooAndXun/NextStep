@@ -36,6 +36,7 @@ class UserController extends Controller
             $test_password = md5($password);
             if($test_password == $user->password){
                 $request->session()->put('user', $user);
+//                $request->session()->put('aver_step',$this->healthLogic->getAverStep($name));
                 return redirect("/home/today");
             }else{
                 return redirect("/login/error/password");
