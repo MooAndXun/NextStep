@@ -51,11 +51,13 @@ Route::group(["prefix"=>'home'], function () {
 Route::group(["prefix"=>'activity'], function () {
     Route::get('/', 'ActivityController@activity_page')->middleware("login_check");
     Route::get('{id}', 'ActivityController@activity_detail_page')->where('id', '[0-9]+');
+    Route::get('create', "ActivityController@activity_edit_page");
+    Route::get('edit/{id}', "ActivityController@activity_edit_page")->where('id', '[0-9]+');
 
-    Route::post('join/{id}/{username}', 'ActivityController@join');
     Route::post('/','ActivityController@create')->middleware("login_check");
     Route::delete('/','ActivityController@delete');
-    Route::post('/update','ActivityController@update')->middleware("login_check");
+    Route::put('/{id}','ActivityController@update')->middleware("login_check");
+    Route::post('join/{id}/{username}', 'ActivityController@join');
 });
 
 // Circle Routes

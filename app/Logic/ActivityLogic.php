@@ -68,9 +68,14 @@ class ActivityLogic
     {
         $activity = Activity::find($activity_id);
         $user = $activity->participators()->where('participator_username', $username)->get();
-        if($user){
+        if(count($user)>0){
             return true;
         }
         return false;
+    }
+
+    public function join($username, $id) {
+        $activity = Activity::find($id);
+        $activity->participators()->attach($username, ['created_at'=>date('Y-m-d',time())]);
     }
 }

@@ -52,6 +52,21 @@ class ActivityController extends Controller
         ])->with(['page_name'=>'活动详情', 'tab_index'=>1, 'sub_tab_index'=>-1]);
     }
 
+    public function activity_edit_page($id=-1) {
+        if($id!=-1) {
+            $activity = Activity::find($id);
+            $page_name = '编辑活动';
+            $is_create = 0;
+        } else {
+            $page_name = '创建活动';
+            $activity = new Activity();
+            $is_create = 1;
+        }
+        return view('pages.activity-edit')
+            ->with(['activity'=>$activity, 'is_create'=>$is_create])
+            ->with(['page_name'=>$page_name, 'tab_index'=>1, 'sub_tab_index'=>-1]);
+    }
+
     // Ajax
     public function create(Request $request){
         $this->validate($request, [
@@ -64,8 +79,6 @@ class ActivityController extends Controller
             'description' => 'required'
         ]);
         $username = session("user")['username'];
-//        $username = "Mike";
-        $response = null;
         $activity = new Activity();
         $activity->name = $request->get('name');
         $activity->start = $request->get('start');
@@ -76,11 +89,10 @@ class ActivityController extends Controller
         $activity->description = $request->get('description');
         $activity->creator_username = $username;
         $activity->save();
-        $response = array(
-            'status' => 'success',
-            'msg' => '创建成功'
-        );
-        return response()->json($response);
+
+        $this->activityLogic->join($username, $activity['id']);
+
+        return redirect('/activity/'.$activity['id']);
     }
 
     //Ajax
@@ -135,11 +147,7 @@ class ActivityController extends Controller
     }
 
     public function join(Request $request, $id, $username) {
-        $activity = Activity::find($id);
-        $activity->participators()->attach($username, ['created_at'=>date('Y-m-d',time())]);
-
-        $response = [];
-        $response['status'] = 'success';
+        $this->activityLogic->join($username,$id);
         return redirect('/activity');
     }
 }
