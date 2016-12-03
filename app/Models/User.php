@@ -27,10 +27,10 @@ class User extends Model
     }
 
     public function followers(){
-        return $this->belongsToMany(this, 'follow', 'follower_username', 'following_username');
+        return $this->belongsToMany($this, 'follow', 'following_username', 'follower_username');
     }
 
     public function followings(){
-        return $this->belongsToMany(this, 'follow', 'following_username', 'follower_username');
+        return $this->belongsToMany($this, 'follow', 'follower_username', 'following_username');
     }
 }

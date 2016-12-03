@@ -225,6 +225,7 @@ nav.page-nav {
       flex-grow: 1;
       font-family: 'Berlin Sans FB Demi Bold';
       font-size: 40px;
+      text-decoration: none;
     }
   }
 }
@@ -268,6 +269,11 @@ nav.page-nav {
           line-height: 30px;
         }
       }
+    }
+
+    .create-btn {
+      width: auto;
+      height: 40px;
     }
   }
 
@@ -373,15 +379,14 @@ nav.page-nav {
 }
 
 @media screen and (max-width:800px){
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-  }
-  header {
+  .container {
     width: auto;
-    background-size:100%;
   }
+
+  header .header-wrapper {
+    width: auto;
+  }
+
   .container {
     flex-direction: column;
     justify-content: center;
@@ -391,12 +396,12 @@ nav.page-nav {
     .content-left {
       flex-grow: 0;
       width: auto;
-      margin: 0 80px;
+      margin: 0 30px;
     }
 
     .content {
       width: auto;
-      margin: 0 auto;
+      margin: 0 30px;
     }
   }
 }

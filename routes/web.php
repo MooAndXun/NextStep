@@ -29,6 +29,8 @@ Route::group(['prefix'=>'register'], function () {
 
 // User Routes
 Route::group(['prefix'=>'user'], function () {
+    Route::get('edit', 'UserController@edit_page');
+
     Route::post('login', 'UserController@login');
     Route::post('register', 'UserController@register');
     Route::post('info','UserController@updateUserInfo');
@@ -38,6 +40,9 @@ Route::group(['prefix'=>'user'], function () {
 //Follow Routes
 Route::group(['prefix'=>'follow'],function (){
     Route::get('','FollowController@friends_page');
+
+    Route::post('{username}', 'FollowController@followUser');
+    Route::post('/delete/{username}', 'FollowController@cancelFollow');
 });
 
 // Home Routes
@@ -51,11 +56,13 @@ Route::group(["prefix"=>'home'], function () {
 Route::group(["prefix"=>'activity'], function () {
     Route::get('/', 'ActivityController@activity_page')->middleware("login_check");
     Route::get('{id}', 'ActivityController@activity_detail_page')->where('id', '[0-9]+');
+    Route::get('create', "ActivityController@activity_edit_page");
+    Route::get('edit/{id}', "ActivityController@activity_edit_page")->where('id', '[0-9]+');
 
-    Route::post('join/{id}/{username}', 'ActivityController@join');
     Route::post('/','ActivityController@create')->middleware("login_check");
-    Route::delete('/','ActivityController@delete');
-    Route::post('/update','ActivityController@update')->middleware("login_check");
+    Route::post('delete/{id}','ActivityController@delete');
+    Route::post('{id}','ActivityController@update')->where('id', '[0-9]+')->middleware("login_check");
+    Route::post('join/{id}/{username}', 'ActivityController@join');
 });
 
 // Circle Routes
@@ -73,4 +80,7 @@ Route::group(['prefix'=>'circle'], function () {
 Route::group(['prefix'=>'permission'], function () {
     Route::get('/', 'PermissionController@permission_manage_page');
     Route::get('management', 'PermissionController@permission_manage_page');
+
+    Route::get('/update/{username}/{type}', 'PermissionController@update')->where('id', '[0-9]+');
+
 });

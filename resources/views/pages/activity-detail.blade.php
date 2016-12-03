@@ -11,10 +11,18 @@
             <p class="name">{{$activity['name']}}</p>
             <p class="intro">{{$activity['start']}} — {{$activity['end']}}</p>
           </div>
+          @if($activity['creator_username']==$current_user['username'])
+            <form action = "/activity/delete/{{$activity['id']}}" method="post">
+              {!! csrf_field() !!}
+              <button type='submit' class="btn">删除</button>
+            </form>
+            <button class="btn btn-second" onclick="window.location.href='/activity/edit/{{$activity['id']}}'">修改</button>
+          @else
           <form name='joinForm{{$activity['id']}}' action = "/activity/join/{{$activity['id']}}/{{$current_user['username']}}" method="post">
             {!! csrf_field() !!}
-            <button type='submit' class="btn btn-pink join-btn waves-effect waves-light">加入</button>
+            <button type='submit' class="btn btn-pink join-btn">加入</button>
           </form>
+          @endif
         </div>
         <div class="act-info">
           <div class="act-info-item">

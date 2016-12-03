@@ -8,12 +8,14 @@ namespace App\Utils;
  */
 class ObjectUtil
 {
-    public static function object_to_array($obj){
-        $_arr=is_object($obj)?get_object_vars($obj):$obj;
+
+    public static function object_to_array($obj)
+    {
+        $_arr = is_object($obj) ? get_object_vars($obj) : $obj;
         $arr = [];
-        foreach($_arr as $key=>$val){
-            $val=(is_array($val))||is_object($val)?ObjectUtil::object_to_array($val):$val;
-            $arr[$key]=$val;
+        foreach ($_arr as $key => $val) {
+            $val = (is_array($val)) || is_object($val) ? ObjectUtil::object_to_array($val) : $val;
+            $arr[$key] = $val;
         }
         return $arr;
     }

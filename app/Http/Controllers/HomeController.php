@@ -27,7 +27,7 @@ class HomeController extends Controller
         $result = $date->format('Y-m-d');
         $steps = $user->steps()->where('date',$result)->first();
         $sleep = $user->sleep()->where('date',$result)->first();
-        $sleep_hour = (int)(($sleep->sleep_minutes) / 60);
+        $sleep_hour = (int)(($sleep)?$sleep->sleep_minutes:0 / 60);
         $users_data = $this->healthLogic->friends_data($user->username,$result,10);
         $rank = $this->healthLogic->user_step_rank($user->username,$steps->steps,$result)[0]->rank;
 
