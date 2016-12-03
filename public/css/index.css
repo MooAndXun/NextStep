@@ -171,7 +171,8 @@ nav.page-nav {
       color: #fff;
       flex-grow: 1;
       font-family: 'Berlin Sans FB Demi Bold';
-      font-size: 40px; }
+      font-size: 40px;
+      text-decoration: none; }
 
 .container {
   display: flex;

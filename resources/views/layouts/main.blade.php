@@ -32,7 +32,7 @@
             ['name' => '运动动态', 'url' => '/follow'],
             ['name' => '我的活动', 'url' => '/activity?isMine=true'],
             ['name' => '我的圈子', 'url' => '/circle?isMine=true'],
-            ['name' => '我的关注', 'url' => '/follow']]],
+            ['name' => '我的关注', 'url' => '/follow?isMine=true']]],
         ['name' => '活动', 'url' => '/activity', 'sub_tab' => [
             ['name' => '所有活动', 'url' => '/activity'],
             ['name' => '我创建的活动', 'url' => '/activity?isMine=true']]],
@@ -41,12 +41,16 @@
             ['name' => '我创建的圈子', 'url' => '/circle?isMine=true']]],
         ['name' => '权限', 'url' => '/permission', 'sub_tab' => [
             ['name' => '权限管理', 'url' => '/permission/management'],
-            ['name' => '权限设置', 'url' => '/permission']]]
+            ['name' => '权限设置', 'url' => '/permission']]],
+        ['name' => '关注', 'url' => '/follow?isMine=true', 'sub_tab' => [
+            ['name' => '我的关注', 'url' => '/follow?isMine=true'],
+            ['name' => '所有用户', 'url' => '/follow']]],
     ];
 
     $create_button = [
         '首页'=>false,
         '权限'=>false,
+        '关注'=>false,
         '活动'=>['name'=>'创建活动', 'url'=>'/activity/create'],
         '圈子'=>['name'=>'创建圈子', 'url'=>'/circle/create']
     ]
@@ -58,14 +62,14 @@
   <div class="header-wrapper">
     <nav class="page-nav">
       <div class="nav-wrapper">
-        <h1 class="brand-logo">NextSTEP</h1>
+        <a href="/login" class="brand-logo">NextSTEP</a>
         <div class="nav-right">
           <a href="#" class="icon-link dropdown-button"
              data-activates='dropdown_user'
              data-alignment='right'
              data-beloworigin="true"><i class="material-icons white-text circle">account_circle</i></a>
           <ul id='dropdown_user' class='dropdown-content'>
-            <li><a href="#!">个人信息</a></li>
+            <li><a href="/user/edit">个人信息</a></li>
             <li><a href="#!">我的关注</a></li>
             <li><a href="#!">注销</a></li>
           </ul>

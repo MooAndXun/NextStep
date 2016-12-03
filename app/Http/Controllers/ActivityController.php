@@ -117,15 +117,9 @@ class ActivityController extends Controller
     }
 
     //Ajax
-    public function update(Request $request){
-        $this->validate($request, [
-            'id' => 'required'
-        ]);
+    public function update(Request $request, $id){
         $username = session("user")['username'];
-//        $username = "Mike";
-        $activity_id = $request->get("id");
-        $response = [];
-        $activity = Activity::find($activity_id);
+        $activity = Activity::find($id);
         if($activity && ($activity['creator_username'] == $username)) {
             $activity->name = ($request->get('name') =='') ? $activity->name:$request->get('name');
             $activity->start = ($request->get('start') =='') ? $activity->start:$request->get('start');
@@ -135,15 +129,10 @@ class ActivityController extends Controller
             $activity->reward = ($request->get('reward') =='') ? $activity->reward:$request->get('reward');
             $activity->description = ($request->get('description') =='') ? $activity->description:$request->get('description');
             $activity->save();
-            $response = array(
-                'status' => 'success',
-                'msg' => '修改成功'
-            );
+            return redirect('/activity/'.$id);
         }else{
-                $response['status'] = 'failed';
-                $response['msg'] = '权限不足或该活动不存在';
+            return redirect('/activity/'.$id);
         }
-        return response()->json($response);
     }
 
     public function join(Request $request, $id, $username) {

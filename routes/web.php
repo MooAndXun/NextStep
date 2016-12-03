@@ -29,6 +29,8 @@ Route::group(['prefix'=>'register'], function () {
 
 // User Routes
 Route::group(['prefix'=>'user'], function () {
+    Route::get('edit', 'UserController@edit_page');
+
     Route::post('login', 'UserController@login');
     Route::post('register', 'UserController@register');
     Route::post('info','UserController@updateUserInfo');
@@ -38,6 +40,8 @@ Route::group(['prefix'=>'user'], function () {
 //Follow Routes
 Route::group(['prefix'=>'follow'],function (){
     Route::get('','FollowController@friends_page');
+
+    Route::post('{username}', 'FollowerController@followUser');
 });
 
 // Home Routes
@@ -56,7 +60,7 @@ Route::group(["prefix"=>'activity'], function () {
 
     Route::post('/','ActivityController@create')->middleware("login_check");
     Route::delete('/','ActivityController@delete');
-    Route::put('/{id}','ActivityController@update')->middleware("login_check");
+    Route::post('/{id}','ActivityController@update')->where('id', '[0-9]+')->middleware("login_check");
     Route::post('join/{id}/{username}', 'ActivityController@join');
 });
 
@@ -75,4 +79,6 @@ Route::group(['prefix'=>'circle'], function () {
 Route::group(['prefix'=>'permission'], function () {
     Route::get('/', 'PermissionController@permission_manage_page');
     Route::get('management', 'PermissionController@permission_manage_page');
+
+    Route::post('/{id}', 'PermissionController@update');
 });
