@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Logic\UserLogic;
 use Illuminate\Http\Request;
 use League\Flysystem\Exception;
 
@@ -11,10 +12,12 @@ use App\Logic\HealthLogic;
 class UserController extends Controller
 {
     protected $healthLogic;
+    protected $userLogic;
 
-    public function __construct(HealthLogic $healthLogic)
+    public function __construct(HealthLogic $healthLogic, UserLogic $userLogic)
     {
         $this->healthLogic = $healthLogic;
+        $this->userLogic = $userLogic;
     }
 
     // Page
@@ -78,6 +81,10 @@ class UserController extends Controller
         return response()->json($response);
     }
 
+    public function edit_page(Request $request) {
+        return view('pages.user-edit')
+            ->with(['page_name'=>'个人信息', 'tab_index'=>0, 'sub_tab_index'=>-1]);
+    }
 
     // Ajax
     public function getUserInfo(Request $request){
@@ -100,36 +107,25 @@ class UserController extends Controller
     }
 
     public function updateUserInfo(Request $request){
-        $response = null;
-        $name = $request->session()->get('username');
-        if($name){
-            $user = User::where('username',$name)->first();
+        $user = session('user');
+        if($user){
             $user->nick_name = $request->get('nick_name')?$request->get('nick_name'):$user->nick_name;
-            $user->age = $request->get('age')?$request->get('age'):$user->age;
+            $user->description = $request->get('description')?$request->get('description'):$user->description;
+            $user->gender = $request->get('gender')!=null?$request->get('gender'):$user->gender;
             $user->height = $request->get('height')?$request->get('height'):$user->height;
             $user->weight = $request->get('weight')?$request->get('weight'):$user->weight;
-            $user->steps_goal = $request->get('steps_goal')?$request->get('steps_goal'):$user->steps_goal;
+            $user->step_goal = $request->get('step_goal')?$request->get('step_goal'):$user->step_goal;
             $user->weight_goal = $request->get('weight_goal')?$request->get('weight_goal'):$user->weight_goal;
             try{
-                $user->saveOrFail();
-                $response = array(
-                    'status' => 'success',
-                    'msg' => '修改成功'
-                );
+                $user->save();
+//                echo json_encode($user);
+                return redirect('/user/edit');
             }catch (Exception $exception){
-                $response = array(
-                    'status' => 'failed',
-                    'msg' => '数据库异常'
-                );
+                return redirect('/user/edit');
             }
         }else{
-            $response = array(
-                'status' => 'failed',
-                'msg' => '用户未登录'
-            );
+            return redirect('/login');
         }
-
-        return response()->json($response);
     }
 
 
