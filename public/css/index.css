@@ -206,6 +206,9 @@ nav.page-nav {
       .container .content-left .siderbar-nav .collection .collection-item {
         height: 50px;
         line-height: 30px; }
+    .container .content-left .create-btn {
+      width: auto;
+      height: 40px; }
   .container .content {
     flex-grow: 1;
     margin-left: 40px; }
@@ -305,13 +308,10 @@ nav.page-nav {
       flex-grow: 1; }
 
 @media screen and (max-width: 800px) {
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100%; }
-  header {
-    width: auto;
-    background-size: 100%; }
+  .container {
+    width: auto; }
+  header .header-wrapper {
+    width: auto; }
   .container {
     flex-direction: column;
     justify-content: center;
@@ -319,10 +319,10 @@ nav.page-nav {
     .container .content-left {
       flex-grow: 0;
       width: auto;
-      margin: 0 80px; }
+      margin: 0 30px; }
     .container .content {
       width: auto;
-      margin: 0 auto; } }
+      margin: 0 30px; } }
 
 .login-card {
   position: absolute;

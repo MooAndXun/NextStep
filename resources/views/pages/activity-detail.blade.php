@@ -11,9 +11,12 @@
             <p class="name">{{$activity['name']}}</p>
             <p class="intro">{{$activity['start']}} — {{$activity['end']}}</p>
           </div>
+          @if($activity['creator_username']==$current_user['username'])
+            <button class="btn btn-second" onclick="window.location.href='/activity/edit/{{$activity['id']}}'">修改</button>
+          @endif
           <form name='joinForm{{$activity['id']}}' action = "/activity/join/{{$activity['id']}}/{{$current_user['username']}}" method="post">
             {!! csrf_field() !!}
-            <button type='submit' class="btn btn-pink join-btn waves-effect waves-light">加入</button>
+            <button type='submit' class="btn btn-pink join-btn">加入</button>
           </form>
         </div>
         <div class="act-info">

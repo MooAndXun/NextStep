@@ -53,10 +53,10 @@
       </div>
       <div class="card friend-card">
         <div class="card-content">
-          <img src="../img/user_avatar/person-2.jpg" alt="Avatar" class="avatar">
+          <img src="../img/user_avatar/person-1.jpg" alt="Avatar" class="avatar">
           <div class="user-info">
             <p class="name">Mike</p>
-            <p class="intro">刚刚加入了活动 <b>南京马拉松</b></p>
+            <p class="intro">刚刚加入了活动 <b>南马</b></p>
           </div>
           <div class="icon-info">
             <button class="join-btn btn waves-effect waves-light">加入</button>
@@ -65,7 +65,7 @@
       </div>
       <div class="card friend-card">
         <div class="card-content">
-          <img src="../img/user_avatar/person-2.jpg" alt="Avatar" class="avatar">
+          <img src="../img/user_avatar/person-3.jpg" alt="Avatar" class="avatar">
           <div class="user-info">
             <p class="name">Nick</p>
             <p class="intro">刚刚加入了圈子 <b>跑步圈</b></p>
