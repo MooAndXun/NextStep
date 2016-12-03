@@ -96,24 +96,16 @@ class ActivityController extends Controller
     }
 
     //Ajax
-    public function delete(Request $request){
-        $this->validate($request, [
-            'id' => 'required'
-        ]);
+    public function delete(Request $request, $id){
         $username = session("user")["username"];
-//        $username = "Mike";
-        $activity_id = $request->get("id");
-        $response = [];
+        $activity_id = $id;
         $activity = Activity::find($activity_id);
         if($activity && ($activity['creator_username'] == $username)){
             $activity->delete();
-            $response['status'] = 'success';
-            $response['msg'] = '删除成功';
+            return redirect('/activity');
         }else{
-            $response['status'] = 'failed';
-            $response['msg'] = '权限不足或该活动不存在';
+            return redirect('/activity');
         }
-        return response()->json($response);
     }
 
     //Ajax

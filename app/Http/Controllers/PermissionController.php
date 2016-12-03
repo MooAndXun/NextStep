@@ -48,10 +48,9 @@ class PermissionController
             ->with(['page_name'=>'权限管理', 'tab_index'=>3, 'sub_tab_index'=>0]);
     }
 
-    public function update(Request $request, $id) {
-        $permission = $request->get('permission');
-        $user = User::find($id);
-        $user->permission = $permission;
+    public function update(Request $request, $username, $type) {
+        $user = User::find($username);
+        $user->permission = $type;
         $user->save();
 
         return redirect('/permission');

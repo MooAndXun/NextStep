@@ -8,13 +8,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Logic\UserLogic;
 use App\Logic\HealthLogic;
 use App\Utils\ObjectUtil;
 
 
-class FollowController
+class FollowController extends Controller
 {
     protected $healthLogic;
     protected $userLogic;
@@ -52,7 +53,7 @@ class FollowController
     // Ajax
     public function followUser(Request $request, $username){
         $following = $username;
-        $follower = $request->session()->get('username');
+        $follower = $request->session()->get('user')['username'];
         if($follower){
             $user = User::find($following);
             $own = User::find($follower);
@@ -65,5 +66,14 @@ class FollowController
         }else{
             return redirect('/follow?isMine=true');
         }
+    }
+
+    public function cancelFollow($username) {
+        $following = $username;
+        $follower = session('user')['username'];
+        $user = User::find($following);
+        $own = User::find($follower);
+        $own->followings()->detach($user);
+        return redirect('/follow?isMine=true');
     }
 }

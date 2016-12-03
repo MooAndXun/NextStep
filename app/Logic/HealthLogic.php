@@ -21,7 +21,6 @@ class HealthLogic
             $users_data = DB::select('SELECT following.username as username, nick_name,avatar as avatar_img,description,(CASE WHEN(steps ISNULL) THEN 0 ELSE steps END) AS steps FROM (SELECT * FROM follow WHERE follower_username = :username) follow
                                     JOIN user following ON follow.following_username = following.username
                                     LEFT JOIN (SELECT username, steps FROM step WHERE step."date" = :date) step ON step.username = following.username
-                                    WHERE following.username<>:username
                                   ORDER BY step.steps DESC LIMIT :num', [':username'=>$username,':date'=>$date, ':num'=>$num]);
         }else{
             $users_data = DB::select('SELECT following.username as username, nick_name,avatar as avatar_img,description,(CASE WHEN(steps ISNULL) THEN 0 ELSE steps END) AS steps FROM (SELECT * FROM follow WHERE follower_username = :username) follow

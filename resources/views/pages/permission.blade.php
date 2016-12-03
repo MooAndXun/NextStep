@@ -28,9 +28,9 @@
                   data-constrainwidth="false">更改权限</button>
           <!-- Dropdown Structure -->
           <ul id='dropdown_{{$index}}' class='dropdown-content'>
-            <li><a href="#!">系统管理员</a></li>
-            <li><a href="#!">初级用户</a></li>
-            <li><a href="#!">高级用户</a></li>
+            <li><a href="/permission/update/{{$user['username']}}/0">系统管理员</a></li>
+            <li><a href="/permission/update/{{$user['username']}}/1">初级用户</a></li>
+            <li><a href="/permission/update/{{$user['username']}}/2">高级用户</a></li>
           </ul>
         </div>
       </div>

@@ -44,7 +44,7 @@
             ['name' => '权限设置', 'url' => '/permission']]],
         ['name' => '关注', 'url' => '/follow?isMine=true', 'sub_tab' => [
             ['name' => '我的关注', 'url' => '/follow?isMine=true'],
-            ['name' => '所有用户', 'url' => '/follow']]],
+            ['name' => '未关注的用户', 'url' => '/follow']]],
     ];
 
     $create_button = [

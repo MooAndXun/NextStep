@@ -13,7 +13,8 @@
         <div class="icon-info">
           <i class="material-icons medium">directions_run</i>
           <p class='step-count'>{{$friend['steps']}}</p>
-          <form action = "/follow/{{$friend['username']}}" method="post">
+          <form action = "/follow/@if($is_mine)delete/@endif{{$friend['username']}}" method="post">
+            {!! csrf_field() !!}
             <button type='submit' class="btn @if(!$is_mine)btn-pink join-btn@else joined-btn @endif waves-effect waves-light">@if(!$is_mine)关注@else已关注@endif</button>
           </form>
         </div>
