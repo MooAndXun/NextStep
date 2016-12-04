@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use App\Logic\UserLogic;
 use App\Logic\HealthLogic;
@@ -49,6 +50,21 @@ class FollowController extends Controller
         }
     }
 
+    public function follow_detail_page($username) {
+        $user = User::find($username);
+        $date = new DateTime();
+        $result = $date->format('Y-m-d');
+        $steps = $user->steps()->where('date',$result)->first();
+        $sleep = $user->sleep()->where('date',$result)->first();
+        $steps= $steps?$steps->steps:0;
+        $sleep_hour = (int)((($sleep)?$sleep->sleep_minutes:0) / 60);
+
+        return view('pages.follow-detail')->with([
+            'friend_username'=>$user['username'],
+            'steps'=>$steps,
+            'sleep_hour'=>$sleep_hour,
+        ])->with(['page_name'=>'好友详情', 'tab_index'=>4, 'sub_tab_index'=>-1]);
+    }
 
     // Ajax
     public function followUser(Request $request, $username){

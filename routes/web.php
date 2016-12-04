@@ -40,6 +40,7 @@ Route::group(['prefix'=>'user'], function () {
 //Follow Routes
 Route::group(['prefix'=>'follow'],function (){
     Route::get('','FollowController@friends_page');
+    Route::get('/detail/{username}', 'FollowController@follow_detail_page');
 
     Route::post('{username}', 'FollowController@followUser');
     Route::post('/delete/{username}', 'FollowController@cancelFollow');

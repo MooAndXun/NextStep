@@ -40,8 +40,7 @@
             ['name' => '所有圈子', 'url' => '/circle'],
             ['name' => '我创建的圈子', 'url' => '/circle?isMine=true']]],
         ['name' => '权限', 'url' => '/permission', 'sub_tab' => [
-            ['name' => '权限管理', 'url' => '/permission/management'],
-            ['name' => '权限设置', 'url' => '/permission']]],
+            ['name' => '权限管理', 'url' => '/permission/management']]],
         ['name' => '关注', 'url' => '/follow?isMine=true', 'sub_tab' => [
             ['name' => '我的关注', 'url' => '/follow?isMine=true'],
             ['name' => '未关注的用户', 'url' => '/follow']]],
