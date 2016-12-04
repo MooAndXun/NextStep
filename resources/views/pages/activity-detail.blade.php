@@ -70,7 +70,7 @@
             <p>{{$participator['username']}}</p>
           </div>
           <div class="collection-col collection-col-2 count-col">{{$participator['steps']}}</div>
-          <div class="collection-col rank-col">{{$index}}</div>
+          <div class="collection-col rank-col">{{$index+1}}</div>
         </li>
         @endforeach
       </ul>

@@ -8,14 +8,14 @@ use App\Utils\TimeUtil;
 class WearableController extends Controller
 {
     //模拟可穿戴设备
-    public function healthData(Request $request){
+    public function healthData(Request $request, $start_date, $date_num){
 
-        $date = $request->get('start_date');
-        $date_num = $request->get('date_num');
+//        $date = $request->get('start_date');
+//        $date_num = $request->get('date_num');
         $result = array();
         for ($i = 0;$i<$date_num;$i++){
             $temp = array();
-            $temp_date = TimeUtil::date_add_day($date,$i);
+            $temp_date = TimeUtil::date_add_day($start_date,$i);
             $sleep_minutes = random_int(180,600);
             $deep_minutes = random_int(60,$sleep_minutes);
             $sleep_start = TimeUtil::rand_time($temp_date.'00.00.00',$temp_date.'04:00:00');

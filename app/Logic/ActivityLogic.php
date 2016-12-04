@@ -25,9 +25,9 @@ class ActivityLogic
             CASE '多人竞赛':
                 $ranks = DB::select("SELECT user.username, avatar, (CASE WHEN(steps ISNULL) THEN 0 ELSE steps END) AS steps FROM activity__participator
                                       JOIN user ON activity__participator.participator_username = user.username
-                                      LEFT JOIN (SELECT username, sum(steps) AS steps FROM step WHERE date BETWEEN strftime('%s', :start) AND strftime('%s', :end) GROUP BY username) step ON step.username = user.username
+                                      LEFT JOIN (SELECT username, sum(steps) AS steps FROM step WHERE strftime('%s', `date`) BETWEEN strftime('%s', :start) AND strftime('%s', :end) GROUP BY username) step ON step.username = user.username
                                     WHERE activity_id = :id
-                                    ORDER BY steps;",
+                                    ORDER BY steps DESC;",
                     [':id'=>$activity['id'], ":start"=>$activity['start'], ":end"=>$activity['end']]);
                 break;
             Default:

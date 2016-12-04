@@ -18,8 +18,15 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 // Activity Routes
-Route::group(["prefix"=>'activity'], function () {
+Route::group(["prefix" => 'activity'], function () {
 
 });
 
-Route::get('/wearable',"WearableController@healthData");
+Route::group(['prefix' => 'health'], function () {
+    Route::get('today/{username}', 'HealthController@getTodayHealthData');
+    Route::get('stat/step/week/{username}', 'HealthController@getWeekStepStat');
+    Route::get('stat/step/day/{username}', 'HealthController@getDayStepStat');
+    Route::get('stat/step/month/{username}', 'HealthController@getMonthStepStat');
+});
+
+Route::get('/wearable/{start_date}/{date_num}', "WearableController@healthData");

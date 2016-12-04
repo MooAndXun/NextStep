@@ -26,7 +26,6 @@ class ActivityController extends Controller
             $sub_tab_index = 1;
             $activities = Activity::where("creator_username", $username)->get();
         } else {
-//            $username = null;
             $page_name = '所有活动';
             $sub_tab_index = 0;
             $activities = Activity::all()->sortByDesc("start");

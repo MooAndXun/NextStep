@@ -11,8 +11,8 @@
   <meta name="viewport" content="width=device-width initial-scale=1"/>
 
   <title>{{$page_name}}</title>
-  <link rel="stylesheet" href="/css/materialize.css">
-  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="{{asset('/css/materialize.css')}}">
+  <link rel="stylesheet" href="{{asset('/css/index.css')}}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
@@ -29,7 +29,7 @@
         ['name' => '首页', 'url' => '/home', 'sub_tab' => [
             ['name' => '今日', 'url' => '/home/today'],
             ['name' => '运动统计', 'url' => '/home/stat'],
-            ['name' => '运动动态', 'url' => '/follow'],
+            ['name' => '运动动态', 'url' => '/home/trend'],
             ['name' => '我的活动', 'url' => '/activity?isMine=true'],
             ['name' => '我的圈子', 'url' => '/circle?isMine=true'],
             ['name' => '我的关注', 'url' => '/follow?isMine=true']]],
@@ -62,16 +62,15 @@
   <div class="header-wrapper">
     <nav class="page-nav">
       <div class="nav-wrapper">
-        <a href="/login" class="brand-logo">NextSTEP</a>
+        <a href="{{url('/login')}}" class="brand-logo">NextSTEP</a>
         <div class="nav-right">
           <a href="#" class="icon-link dropdown-button"
              data-activates='dropdown_user'
              data-alignment='right'
              data-beloworigin="true"><i class="material-icons white-text circle">account_circle</i></a>
           <ul id='dropdown_user' class='dropdown-content'>
-            <li><a href="/user/edit">个人信息</a></li>
-            <li><a href="#!">我的关注</a></li>
-            <li><a href="#!">注销</a></li>
+            <li><a href="{{url('/user/edit')}}">个人信息</a></li>
+            <li><a href="{{url('/login')}}">注销</a></li>
           </ul>
         </div>
       </div>
@@ -80,7 +79,7 @@
     <div class="tabs-wrapper">
       <ul class="tabs nav-tabs">
         @foreach($tab_table as $index=>$tab)
-          <li class="tab nav-tab"><a href="{{$tab['url']}}" class="@if($index===$tab_index){{'active'}}@endif"
+          <li class="tab nav-tab"><a href="{{url($tab['url'])}}" class="@if($index===$tab_index){{'active'}}@endif"
                                      target="_self">{{$tab['name']}}</a></li>
         @endforeach
       </ul>
@@ -92,7 +91,7 @@
   <div class="content-left">
     <div class="user-info-card card">
       <div class="card-content">
-        <img class='avatar' src="{{'/img/user_avatar/'.$current_user['avatar']}}" alt="Avatar">
+        <img class='avatar' src="{{url('/img/user_avatar/'.$current_user['avatar'])}}" alt="Avatar">
         <div class="data-group info-group">
           <div class="data-item info-item">
             <p>8788</p>
@@ -111,13 +110,16 @@
     <div class="siderbar-nav card">
       <ul class="collection">
         @foreach($tab_table[$tab_index]['sub_tab'] as $index=>$tab)
-        <li><a href="{{$tab['url']}}"
+        <li><a href="{{url($tab['url'])}}"
                class="collection-item @if($index===$sub_tab_index){{'active'}}@endif">{{$tab['name']}}</a></li>
         @endforeach
       </ul>
     </div>
-    @if($create_button[$tab_table[$tab_index]['name']])
-    <button onclick="window.location.href='{{$create_button[$tab_table[$tab_index]['name']]['url']}}'" class="btn btn-pink create-btn">{{$create_button[$tab_table[$tab_index]['name']]['name']}}</button>
+    @if($create_button[$tab_table[$tab_index]['name']]&&$current_user['permission']!=1)
+    <button onclick="window.location.href='{{url($create_button[$tab_table[$tab_index]['name']]['url'])}}'" class="btn btn-pink create-btn">{{$create_button[$tab_table[$tab_index]['name']]['name']}}</button>
+    @endif
+    @if($tab_index==0)
+    <button onclick="setTimeout(Materialize.toast.bind(this, '同步成功', 2000), 1000)" class="btn btn-pink sync-btn">同步数据</button>
     @endif
   </div>
 
@@ -136,10 +138,9 @@
   <script>
     var username = "{{$current_user['username']}}";
   </script>
-
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-  <script src='/js/materialize.js'></script>
-  <script src='/js/echarts.common.min.js'></script>
-  <script src="/js/common.js"></script>
+  <script src='{{asset('/js/materialize.js')}}'></script>
+  <script src='{{asset('/js/echarts.common.min.js')}}'></script>
+  <script src='{{asset('/js/common.js')}}'></script>
 @show
 </html>

@@ -2,6 +2,7 @@
  * Created by chenm on 2016/12/1.
  */
 $(document).ready(function() {
+    $('ul.tabs').tabs();
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 16, // Creates a dropdown of 15 years to control year

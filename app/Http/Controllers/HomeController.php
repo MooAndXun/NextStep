@@ -27,7 +27,7 @@ class HomeController extends Controller
         $result = $date->format('Y-m-d');
         $steps = $user->steps()->where('date',$result)->first();
         $sleep = $user->sleep()->where('date',$result)->first();
-        $sleep_hour = (int)(($sleep)?$sleep->sleep_minutes:0 / 60);
+        $sleep_hour = (int)((($sleep)?$sleep->sleep_minutes:0) / 60);
         $users_data = $this->healthLogic->friends_data($user->username,$result,10);
         $rank = $this->healthLogic->user_step_rank($user->username,$steps->steps,$result)[0]->rank;
 
@@ -45,6 +45,14 @@ class HomeController extends Controller
 
         return view('pages.stat')
             ->with(['page_name'=>'运动统计', 'tab_index'=>0, 'sub_tab_index'=>1]);
+    }
+
+    public function trend_page(Request $request) {
+        $user = session('user');
+        $data = User::find($user['username'])->steps()->orderBy('date', 'desc')->get();
+        return view('pages.sport-trend')
+            ->with('data', $data)
+            ->with(['page_name'=>'运动动态', 'tab_index'=>0, 'sub_tab_index'=>2]);
     }
 
     // Ajax

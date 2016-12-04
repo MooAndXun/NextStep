@@ -28,6 +28,7 @@ class TimeUtil
         $date->add(new DateInterval($str));
         return $date->format('Y-m-d');
     }
+
     /**
      * 随机生成时刻
      * @param $start_time
