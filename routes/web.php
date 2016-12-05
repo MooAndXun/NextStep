@@ -65,6 +65,7 @@ Route::group(["prefix"=>'activity'], function () {
     Route::post('delete/{id}','ActivityController@delete');
     Route::post('{id}','ActivityController@update')->where('id', '[0-9]+')->middleware("login_check");
     Route::post('join/{id}/{username}', 'ActivityController@join');
+    Route::post('unjoin/{id}/{username}', 'ActivityController@unjoin');
 });
 
 // Circle Routes

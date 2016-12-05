@@ -36,6 +36,10 @@ class CircleController extends Controller
         }
 
         foreach ($circles as $circle) {
+            $circle->people_now = $circle->members()->count();
+        }
+
+        foreach ($circles as $circle) {
             $circle['is_join'] = $this->circleLogic->checkIsJoin($username,$circle['id']);
         }
         return view('pages.circle')

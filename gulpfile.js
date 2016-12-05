@@ -14,6 +14,9 @@ require('laravel-elixir-vue-2');
  */
 
 elixir(function(mix){
-    mix.sass('app.scss')
-       .webpack('app.js');
+    mix.sass('app.scss');
+    mix.scripts(['jquery.js', 'main.js'], 'public/js/main.js')
+        .scripts(['forum.js', 'threads.js'], 'public/js/forum.js');
+    mix.copy('vendor/foo/bar.css', 'public/css/bar.css');
+    mix.copy('vendor/package/views', 'resources/views');
 });

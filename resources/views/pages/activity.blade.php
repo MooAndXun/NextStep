@@ -24,7 +24,9 @@
             <p class="intro">{{$activity['start']}} — {{$activity['end']}}</p>
           </div>
           <button onclick="window.location.href = '/activity/{{$activity['id']}}'" class="btn btn-second waves-effect waves-light">详情</button>
-          <form name='joinForm{{$activity['id']}}' action = "/activity/join/{{$activity['id']}}/{{$current_user['username']}}" method="post">
+          <form name='joinForm{{$activity['id']}}'
+                action = @if($activity['is_join']==0)"/activity/join/{{$activity['id']}}/{{$current_user['username']}}"@else"/activity/unjoin/{{$activity['id']}}/{{$current_user['username']}}"@endif
+                method="post">
             {!! csrf_field() !!}
             <button type='submit' class="btn @if($activity['is_join']==0)btn-pink join-btn@else joined-btn @endif waves-effect waves-light">@if($activity['is_join']==0)加入@else已加入@endif</button>
             {{--<button type="submit" class="btn btn-pink join-btn waves-effect waves-light" >加入</button>--}}

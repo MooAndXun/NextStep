@@ -52,7 +52,7 @@ function stepChart(steps, goal) {
                     }
                 }
             }, {
-                value: goal - steps > 0 ? steps : 0,
+                value: goal - steps > 0 ? goal - steps : 0,
                 itemStyle: {
                     normal: {
                         color: '#fafafa',

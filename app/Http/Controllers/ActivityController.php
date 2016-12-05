@@ -130,4 +130,9 @@ class ActivityController extends Controller
         $this->activityLogic->join($username,$id);
         return redirect('/activity');
     }
+    public function unjoin(Request $request, $id, $username) {
+        $activity = Activity::find($id);
+        $activity->participators()->detach($username);
+        return redirect('/activity');
+    }
 }

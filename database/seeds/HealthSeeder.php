@@ -11,11 +11,11 @@ class HealthSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('step')->delete();
+//        DB::table('step')->delete();
         $today = (new DateTime())->add(new DateInterval('P'.'2'.'D'));
         $date = $today;
-        $username = 'Mike';
-        for($i=0;$i<2500;$i++) {
+        $username = 'Nick';
+        for($i=0;$i<100;$i++) {
             DB::table('step')->insert([
                 'date'=>$date->format('Y-m-d'),
                 'steps'=>random_int(4000,10000),
